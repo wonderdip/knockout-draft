@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfh10tllkcijw"]
+
+[ext_resource type="Script" uid="uid://bcdx74myvi4j" path="res://Scripts/baki.gd" id="1_r6o28"]
+[ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Baki.png" id="1_ui0qp"]
+[ext_resource type="Script" uid="uid://lubqi53sqw2g" path="res://Scripts/StateMachine/state_machine.gd" id="3_qr76p"]
+[ext_resource type="Script" uid="uid://dp1k5h8ndjx2" path="res://Scripts/StateMachine/PlayerStates/idle.gd" id="4_md325"]
+[ext_resource type="Script" uid="uid://bctm1pl2l3w2o" path="res://Scripts/StateMachine/PlayerStates/walk.gd" id="5_f5a55"]
+
+[sub_resource type="Animation" id="Animation_qr76p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r6o28"]
+resource_name = "idle"
+length = 0.8333367
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000002, 0.20000003, 0.29999998, 0.40000004, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 2, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_f5a55"]
+resource_name = "walk"
+length = 1.1666701
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15000002, 0.30000004, 0.45, 0.6, 0.75, 0.90000004, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 2, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_md325"]
+_data = {
+&"RESET": SubResource("Animation_qr76p"),
+&"idle": SubResource("Animation_r6o28"),
+&"walk": SubResource("Animation_f5a55")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ui0qp"]
+height = 74.0
+
+[node name="Baki" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+script = ExtResource("1_r6o28")
+fighter_name = "Baki"
+speed = 100.0
+jump_height = 1000.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_md325")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ui0qp")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ui0qp")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_qr76p")
+starting_state = NodePath("PlayerIdleState")
+metadata/_custom_type_script = "uid://lubqi53sqw2g"
+
+[node name="PlayerIdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state")]
+script = ExtResource("4_md325")
+idle_state = NodePath(".")
+walk_state = NodePath("../PlayerWalkState")
+metadata/_custom_type_script = "uid://dp1k5h8ndjx2"
+
+[node name="PlayerWalkState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state")]
+script = ExtResource("5_f5a55")
+idle_state = NodePath("../PlayerIdleState")
+walk_state = NodePath(".")
+metadata/_custom_type_script = "uid://bctm1pl2l3w2o"
