@@ -10,7 +10,6 @@ var gravity: float = 500
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-
 func _ready() -> void:
 	state_machine.init()
 	
@@ -22,3 +21,4 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
+	

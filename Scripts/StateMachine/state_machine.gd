@@ -2,11 +2,17 @@ extends Node2D
 class_name StateMachine
 
 @export var starting_state: State
-
+var states : Dictionary[String, State] = {}
 var current_state: State
 
 
 func init() -> void:
+	# Auto collect states
+	for child in get_children():
+		if child is State:
+			states[child.name] = child
+			child.state_machine = self
+			
 	change_state(starting_state)
 	
 func process_frame(delta: float) -> void:

@@ -13,7 +13,7 @@ func exit() -> void:
 func process_physics(delta):
 	player.velocity.x = get_move_dir() * speed
 	if get_move_dir() == 0:
-		return idle_state
+		return get_state("Idle")
 		
 	return super(delta)
 
