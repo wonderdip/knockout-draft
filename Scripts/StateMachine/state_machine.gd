@@ -7,14 +7,17 @@ var current_state: State
 
 
 func init() -> void:
-	# Auto collect states
-	for child in get_children():
+	_collect_states(self)
+	change_state(starting_state)
+
+func _collect_states(node: Node) -> void:
+	for child in node.get_children():
 		if child is State:
 			states[child.name] = child
 			child.state_machine = self
-			
-	change_state(starting_state)
-	
+		
+		_collect_states(child)
+
 func process_frame(delta: float) -> void:
 	var new_state: State = current_state.process_frame(delta)
 	if new_state: change_state(new_state)

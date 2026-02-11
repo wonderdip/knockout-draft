@@ -8,15 +8,13 @@ var idle_anim: String = "idle"
 var walk_anim: String = "walk"
 var jump_anim: String = "jump"
 var fall_anim: String = "fall"
-var light_punch_anim: String = "light_punch"
+var crouch_anim: String = "crouch"
+
 
 #Input Keys
 var movement_key: String = "movement"
 var left_key: String = "left"
 var right_key: String = "right"
-var jump_key: String = "jump"
-var light_punch_key: String = "light_punch"
-
 
 var gravity: float = 300
 

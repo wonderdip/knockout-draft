@@ -11,7 +11,6 @@ func exit() -> void:
 
 func process_physics(delta):
 	player.velocity.x = get_move_dir() * speed
-	print(get_move_dir())
 	if get_move_dir() == 0.0:
 		return get_state("Idle")
 		
@@ -19,6 +18,7 @@ func process_physics(delta):
 	
 func process_input(event: InputEvent) -> State:
 	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
+	if event.is_action_pressed("strong_punch"): return get_state("StrongPunch")
 	if event.is_action_pressed("jump"): return get_state("Jump")
 	return null
 	

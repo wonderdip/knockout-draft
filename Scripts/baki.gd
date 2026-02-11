@@ -6,10 +6,11 @@ class_name Player
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hurtbox: CollisionShape2D = $Hurtbox
 
 func _ready() -> void:
 	state_machine.init()
-	
+
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	
