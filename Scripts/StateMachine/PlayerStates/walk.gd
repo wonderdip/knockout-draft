@@ -4,7 +4,6 @@ class_name PlayerWalkState
 @export var speed: float = 100
 
 func enter() -> void:
-	print("walk")
 	player.animation_player.play(walk_anim)
 
 func exit() -> void:
@@ -12,12 +11,14 @@ func exit() -> void:
 
 func process_physics(delta):
 	player.velocity.x = get_move_dir() * speed
-	if get_move_dir() == 0:
+	print(get_move_dir())
+	if get_move_dir() == 0.0:
 		return get_state("Idle")
 		
 	return super(delta)
-
 	
-func get_move_dir() -> float:
-	return Input.get_axis(left_key, right_key)
+func process_input(event: InputEvent) -> State:
+	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
+	if event.is_action_pressed("jump"): return get_state("Jump")
+	return null
 	

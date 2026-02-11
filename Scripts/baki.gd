@@ -2,11 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @export var fighter_name: String = ""
-@export var speed: float
 @export var damage: float
-@export var jump_height: float
 
-var gravity: float = 500
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
