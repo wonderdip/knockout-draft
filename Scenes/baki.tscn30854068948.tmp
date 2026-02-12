@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cfh10tllkcijw"]
+[gd_scene load_steps=30 format=3 uid="uid://cfh10tllkcijw"]
 
 [ext_resource type="Script" uid="uid://bcdx74myvi4j" path="res://Scripts/baki.gd" id="1_r6o28"]
 [ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Baki.png" id="1_ui0qp"]
@@ -7,9 +7,7 @@
 [ext_resource type="Script" uid="uid://cwoaj8wg5weo5" path="res://Scripts/StateMachine/PlayerStates/crouch.gd" id="5_c4spl"]
 [ext_resource type="Script" uid="uid://bctm1pl2l3w2o" path="res://Scripts/StateMachine/PlayerStates/walk.gd" id="5_f5a55"]
 [ext_resource type="Script" uid="uid://dfs7p5vm1nnjt" path="res://Scripts/StateMachine/PlayerStates/AttackStates/light_punch.gd" id="6_t8bph"]
-[ext_resource type="Script" uid="uid://bsms6xbq0vmwv" path="res://Scripts/StateMachine/PlayerStates/parry.gd" id="7_jtjki"]
 [ext_resource type="Script" uid="uid://c2jcmd2f3ehdi" path="res://Scripts/StateMachine/PlayerStates/jump.gd" id="7_meeca"]
-[ext_resource type="Script" uid="uid://lr40ag3t28ck" path="res://Scripts/StateMachine/PlayerStates/crouch_parry.gd" id="8_0oouj"]
 [ext_resource type="Script" uid="uid://d0il2jfedxq76" path="res://Scripts/StateMachine/PlayerStates/fall.gd" id="8_3bun3"]
 [ext_resource type="Script" uid="uid://bc8ujupfwfr65" path="res://Scripts/StateMachine/PlayerStates/landing.gd" id="9_3cnae"]
 [ext_resource type="Script" uid="uid://nktho56wdch5" path="res://Scripts/StateMachine/PlayerStates/AttackStates/strong_punch.gd" id="10_64vuf"]
@@ -546,68 +544,11 @@ tracks/5/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_0oouj"]
-resource_name = "parry"
-length = 0.03333667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [23]
-}
-
-[sub_resource type="Animation" id="Animation_jtjki"]
-resource_name = "crouch_block"
-length = 0.03333667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [24]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurtbox:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 10)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hurtbox:shape:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [54.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_md325"]
 _data = {
 &"RESET": SubResource("Animation_qr76p"),
 &"crouch": SubResource("Animation_c4spl"),
 &"crouch_light_punch": SubResource("Animation_ax4aj"),
-&"crouch_parry": SubResource("Animation_jtjki"),
 &"crouch_strong_punch": SubResource("Animation_jqp1r"),
 &"fall": SubResource("Animation_3bun3"),
 &"idle": SubResource("Animation_f5a55"),
@@ -615,7 +556,6 @@ _data = {
 &"jump_punch": SubResource("Animation_5ae6y"),
 &"landing": SubResource("Animation_3cnae"),
 &"light_punch": SubResource("Animation_t8bph"),
-&"parry": SubResource("Animation_0oouj"),
 &"strong_punch": SubResource("Animation_64vuf"),
 &"walk": SubResource("Animation_r6o28")
 }
@@ -667,14 +607,6 @@ metadata/_custom_type_script = "uid://cwoaj8wg5weo5"
 script = ExtResource("5_f5a55")
 speed = 80.0
 metadata/_custom_type_script = "uid://bctm1pl2l3w2o"
-
-[node name="Parry" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_jtjki")
-metadata/_custom_type_script = "uid://bsms6xbq0vmwv"
-
-[node name="CrouchParry" type="Node2D" parent="StateMachine"]
-script = ExtResource("8_0oouj")
-metadata/_custom_type_script = "uid://lr40ag3t28ck"
 
 [node name="Jump" type="Node2D" parent="StateMachine"]
 script = ExtResource("7_meeca")

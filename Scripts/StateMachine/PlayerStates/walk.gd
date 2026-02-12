@@ -20,5 +20,6 @@ func process_input(event: InputEvent) -> State:
 	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
 	if event.is_action_pressed("strong_punch"): return get_state("StrongPunch")
 	if event.is_action_pressed("jump"): return get_state("Jump")
+	if event.is_action_pressed("parry"): return get_state("Parry")
 	return null
 	

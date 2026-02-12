@@ -9,7 +9,8 @@ var walk_anim: String = "walk"
 var jump_anim: String = "jump"
 var fall_anim: String = "fall"
 var crouch_anim: String = "crouch"
-
+var parry_anim: String = "parry"
+var crouch_parry_anim: String = "crouch_parry"
 
 #Input Keys
 var movement_key: String = "movement"
@@ -18,19 +19,14 @@ var right_key: String = "right"
 
 var gravity: float = 300
 
-func get_state(name: String) -> PlayerState:
-	return state_machine.states[name]
+func get_state(state_name: String) -> PlayerState:
+	return state_machine.states[state_name]
 
 func enter() -> void:
 	print(name)
 	
 func process_physics(delta: float) -> State:
 	player.velocity.y += gravity * delta
-	
-	if (player.velocity.y > 0 and 
-	not player.is_on_floor() and 
-	not state_machine.current_state == get_state("Fall")):
-		return get_state("Fall")
 		
 	player.move_and_slide()
 		

@@ -6,10 +6,14 @@ class_name PlayerFallState
 func enter() -> void:
 	player.animation_player.play(fall_anim)
 
+func process_input(event: InputEvent) -> State:
+	if event.is_action_pressed("light_punch"): return get_state("JumpPunch")
+	return null
+	
 func process_physics(delta):
 	player.velocity.x = get_move_dir() * air_speed
 	if player.is_on_floor():
 		return get_state("Landing")
-			
+	
 	return super(delta)
 	
