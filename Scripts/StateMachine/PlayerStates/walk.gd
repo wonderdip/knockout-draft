@@ -18,7 +18,12 @@ func process_physics(delta):
 	
 func process_input(event: InputEvent) -> State:
 	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
-	if event.is_action_pressed("strong_punch"): return get_state("StrongPunch")
+		
+	if event.is_action_pressed("strong_punch"):
+		if Input.is_action_pressed("up"):
+			return get_state("Uppercut")
+		return get_state("StrongPunch")
+		
 	if event.is_action_pressed("jump"): return get_state("Jump")
 	if event.is_action_pressed("parry"): return get_state("Parry")
 	return null
