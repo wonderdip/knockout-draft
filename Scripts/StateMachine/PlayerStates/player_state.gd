@@ -22,6 +22,22 @@ var gravity: float = 300
 func get_state(state_name: String) -> PlayerState:
 	return state_machine.states[state_name]
 
+func attack_inputs(event: InputEvent) -> State:
+	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
+	
+	if event.is_action_pressed("strong_punch"):
+		if Input.is_action_pressed("up"):
+			return get_state("Uppercut")
+		return get_state("StrongPunch")
+		
+	if event.is_action_pressed("kick"):
+		if Input.is_action_pressed("up"):
+			return get_state("HighKick")
+		return null
+		
+	return null
+	
+	
 func enter() -> void:
 	print(name)
 	

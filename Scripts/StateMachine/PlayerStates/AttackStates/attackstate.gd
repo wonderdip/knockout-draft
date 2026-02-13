@@ -8,7 +8,7 @@ var uppercut_anim: String = "uppercut"
 var crouch_light_punch_anim: String = "crouch_light_punch"
 var crouch_strong_punch_anim: String = "crouch_strong_punch"
 var jump_punch_anim: String = "jump_punch"
-
+var high_kick_anim: String = "high_kick"
 
 @export var damage: float = 0.0
 var finished: bool = false

@@ -8,11 +8,11 @@ func enter() -> void:
 func exit() -> void:
 	pass
 	
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	return null
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func process_physics(delta: float) -> State:
+
+func process_physics(_delta: float) -> State:
 	return null
