@@ -3,7 +3,6 @@ class_name PlayerStrongPunchState
 
 func enter():
 	super()
-	print("strong_punch")
 	player.animation_player.play(strong_punch_anim)
 	
 func process_physics(delta):

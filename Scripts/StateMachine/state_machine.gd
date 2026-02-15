@@ -2,6 +2,7 @@ extends Node2D
 class_name StateMachine
 
 @export var starting_state: State
+@export var player: Player
 var states : Dictionary[String, State] = {}
 var current_state: State
 
@@ -15,7 +16,8 @@ func _collect_states(node: Node) -> void:
 		if child is State:
 			states[child.name] = child
 			child.state_machine = self
-		
+			child.player = player
+			
 		_collect_states(child)
 
 func process_frame(delta: float) -> void:
@@ -35,3 +37,4 @@ func change_state(new_state: State) -> void:
 	if current_state: current_state.exit()
 	current_state = new_state
 	current_state.enter()
+	print(current_state.name)

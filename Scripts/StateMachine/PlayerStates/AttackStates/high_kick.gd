@@ -3,7 +3,6 @@ class_name PlayerHighKickState
 
 func enter():
 	super()
-	print("highkick")
 	player.animation_player.play(high_kick_anim)
 
 func process_physics(delta):

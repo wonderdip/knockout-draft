@@ -1,7 +1,7 @@
 extends State
 class_name PlayerState
 
-@onready var player: Player = get_tree().get_first_node_in_group("Player")
+var player: Player
 
 #Animation Names
 var idle_anim: String = "idle"
@@ -36,7 +36,6 @@ func attack_inputs(event: InputEvent) -> State:
 		return null
 		
 	return null
-	
 	
 func enter() -> void:
 	print(name)

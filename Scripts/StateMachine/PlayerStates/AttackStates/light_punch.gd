@@ -4,7 +4,6 @@ class_name PlayerLightPunchState
 
 func enter():
 	super()
-	print("light_punch")
 	player.animation_player.play(light_punch_anim)
 
 func process_physics(delta):

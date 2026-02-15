@@ -3,7 +3,6 @@ class_name PlayerUppercutState
 
 func enter():
 	super()
-	print("uppercut")
 	player.animation_player.play(uppercut_anim)
 
 func process_physics(delta):
