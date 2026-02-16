@@ -4,14 +4,17 @@
 [ext_resource type="Script" uid="uid://1f136q74ypx6" path="res://Scripts/punching_bag.gd" id="1_ky4dj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4fixn"]
-radius = 12.0
-height = 76.0
+radius = 14.0
+height = 80.0
 
 [node name="PunchingBag" type="Node2D"]
 script = ExtResource("1_ky4dj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, 0)
+[node name="Pivot" type="Marker2D" parent="."]
+position = Vector2(0, -18)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(0, 20)
 texture = ExtResource("1_4fixn")
 
 [node name="Area2D" type="Area2D" parent="."]

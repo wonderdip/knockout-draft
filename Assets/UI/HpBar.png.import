@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqhm85mdvd5xw"
-path="res://.godot/imported/Baki.png-834697b1636f61209fe0209f50ed80a0.ctex"
+uid="uid://lddsv7h2584g"
+path="res://.godot/imported/HpBar.png-027b23b24ab2b22e186dbd9be089f59a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Baki.png"
-dest_files=["res://.godot/imported/Baki.png-834697b1636f61209fe0209f50ed80a0.ctex"]
+source_file="res://Assets/UI/HpBar.png"
+dest_files=["res://.godot/imported/HpBar.png-027b23b24ab2b22e186dbd9be089f59a.ctex"]
 
 [params]
 

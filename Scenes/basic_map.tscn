@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
+[gd_scene load_steps=8 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="PackedScene" uid="uid://cfh10tllkcijw" path="res://Scenes/baki.tscn" id="1_5o7ry"]
 [ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="1_jlsnh"]
 [ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="3_iaew1"]
 [ext_resource type="PackedScene" uid="uid://duk3qjx5fde02" path="res://Scenes/punching_bag.tscn" id="4_puh4v"]
+[ext_resource type="PackedScene" uid="uid://b41dvsy78vuyh" path="res://Scenes/ui.tscn" id="5_rdgfy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iaew1"]
 texture = ExtResource("1_jlsnh")
@@ -34,3 +35,5 @@ script = ExtResource("3_iaew1")
 
 [node name="PunchingBag" parent="." instance=ExtResource("4_puh4v")]
 position = Vector2(276, 116)
+
+[node name="UI" parent="." instance=ExtResource("5_rdgfy")]
