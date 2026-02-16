@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmrxtaee8x6ma"]
+[gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="PackedScene" uid="uid://cfh10tllkcijw" path="res://Scenes/baki.tscn" id="1_5o7ry"]
 [ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="1_jlsnh"]
+[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="3_iaew1"]
+[ext_resource type="PackedScene" uid="uid://duk3qjx5fde02" path="res://Scenes/punching_bag.tscn" id="4_puh4v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iaew1"]
 texture = ExtResource("1_jlsnh")
@@ -22,5 +24,13 @@ sources/1 = SubResource("TileSetAtlasSource_iaew1")
 tile_map_data = PackedByteArray(0, 0, 12, 0, 11, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_puh4v")
 
-[node name="Baki" parent="." instance=ExtResource("1_5o7ry")]
+[node name="Baki" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_5o7ry")]
 position = Vector2(80, 116)
+camera = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(192, 108)
+script = ExtResource("3_iaew1")
+
+[node name="PunchingBag" parent="." instance=ExtResource("4_puh4v")]
+position = Vector2(276, 116)

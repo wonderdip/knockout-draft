@@ -33,7 +33,7 @@ func attack_inputs(event: InputEvent) -> State:
 	if event.is_action_pressed("kick"):
 		if Input.is_action_pressed("up"):
 			return get_state("HighKick")
-		return null
+		return get_state("Kick")
 		
 	return null
 	

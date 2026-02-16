@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://duk3qjx5fde02"]
+
+[ext_resource type="Texture2D" uid="uid://c8201qccbn8je" path="res://Assets/PunchingBag.png" id="1_4fixn"]
+[ext_resource type="Script" uid="uid://1f136q74ypx6" path="res://Scripts/punching_bag.gd" id="1_ky4dj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4fixn"]
+radius = 12.0
+height = 76.0
+
+[node name="PunchingBag" type="Node2D"]
+script = ExtResource("1_ky4dj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("1_4fixn")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_4fixn")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
