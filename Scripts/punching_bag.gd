@@ -11,6 +11,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# - Show damage numbers
 	# - Apply knockback to bag
 	
+	if area.name != "AttackBox":
+		return
+	
 	print("Bag hit!")
 	
 	# Optional: Make the bag swing or react visually
@@ -18,6 +21,3 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	tween.tween_property(pivot, "rotation", -0.1, 0.1)
 	tween.tween_property(pivot, "rotation", 0.1, 0.1)
 	tween.tween_property(pivot, "rotation", 0.0, 0.1)
-
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	pass

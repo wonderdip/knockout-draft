@@ -1,7 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://cfh10tllkcijw"]
+[gd_scene load_steps=53 format=3 uid="uid://cfh10tllkcijw"]
 
 [ext_resource type="Script" uid="uid://bcdx74myvi4j" path="res://Scripts/baki.gd" id="1_r6o28"]
-[ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Baki.png" id="1_ui0qp"]
+[ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Characters/Baki/Baki.png" id="2_64efi"]
 [ext_resource type="Script" uid="uid://lubqi53sqw2g" path="res://Scripts/StateMachine/state_machine.gd" id="3_qr76p"]
 [ext_resource type="Script" uid="uid://dp1k5h8ndjx2" path="res://Scripts/StateMachine/PlayerStates/idle.gd" id="4_md325"]
 [ext_resource type="Script" uid="uid://cwoaj8wg5weo5" path="res://Scripts/StateMachine/PlayerStates/crouch.gd" id="5_c4spl"]
@@ -21,6 +21,12 @@
 [ext_resource type="Script" uid="uid://b3aie60v8ljpr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/uppercut.gd" id="17_ergsl"]
 [ext_resource type="Script" uid="uid://58j3egyvj5pb" path="res://Scripts/StateMachine/PlayerStates/AttackStates/high_kick.gd" id="18_tg356"]
 [ext_resource type="Script" uid="uid://boqjeoefqersr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
+[ext_resource type="Texture2D" uid="uid://lddsv7h2584g" path="res://Assets/UI/HpBar.png" id="22_mi812"]
+[ext_resource type="Texture2D" uid="uid://dfoojng7d4ya1" path="res://Assets/UI/HpBg.png" id="22_wn8gv"]
+[ext_resource type="Script" uid="uid://bj7wafrii7107" path="res://Scripts/health_bar.gd" id="23_rdo4m"]
+[ext_resource type="Script" uid="uid://daym0c4jbr16k" path="res://Scripts/stamina_bar.gd" id="24_rdo4m"]
+[ext_resource type="Texture2D" uid="uid://b28cbvk5ieien" path="res://Assets/UI/Stamina.png" id="24_yqkxa"]
+[ext_resource type="Texture2D" uid="uid://clb8pr4e8ql6r" path="res://Assets/Characters/Baki/BakiMugShot.png" id="26_a5r0i"]
 
 [sub_resource type="Animation" id="Animation_qr76p"]
 length = 0.001
@@ -171,6 +177,70 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_64efi"]
+resource_name = "crouch_hurt"
+length = 0.03333667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [33]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtboxArea/HurtboxCollisionShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtboxArea/HurtboxCollisionShape:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [54.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ax4aj"]
@@ -505,6 +575,34 @@ tracks/6/keys = {
 "values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_5ipve"]
+resource_name = "hurt"
+length = 0.03333667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_f5a55"]
 resource_name = "walk"
 length = 1.1666701
@@ -609,6 +707,58 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.36666667, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_houyy"]
+resource_name = "kick"
+length = 0.33333668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.23333335),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [30, 31, 30]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackBox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5707963267948966]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -831,126 +981,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 3, 2, 1]
 }
 
-[sub_resource type="Animation" id="Animation_houyy"]
-resource_name = "kick"
-length = 0.33333668
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10000001, 0.23333335),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [30, 31, 30]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(30, 4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5707963267948966]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_5ipve"]
-resource_name = "hurt"
-length = 0.03333667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [32]
-}
-
-[sub_resource type="Animation" id="Animation_64efi"]
-resource_name = "crouch_hurt"
-length = 0.03333667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [33]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtboxArea/HurtboxCollisionShape:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 10)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtboxArea/HurtboxCollisionShape:shape:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [54.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Hitbox:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 10)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_md325"]
 _data = {
 &"RESET": SubResource("Animation_qr76p"),
@@ -980,11 +1010,19 @@ height = 74.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_houyy"]
 height = 44.0
 
+[sub_resource type="Theme" id="Theme_yqkxa"]
+
+[sub_resource type="Gradient" id="Gradient_qdvrb"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5r0i"]
+gradient = SubResource("Gradient_qdvrb")
+
 [node name="Baki" type="CharacterBody2D" groups=["Player"]]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_r6o28")
 fighter_name = "Baki"
+stamina_gain = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -992,7 +1030,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ui0qp")
+texture = ExtResource("2_64efi")
 hframes = 5
 vframes = 7
 
@@ -1106,3 +1144,53 @@ metadata/_custom_type_script = "uid://58j3egyvj5pb"
 script = ExtResource("19_houyy")
 hit_strength = 1
 metadata/_custom_type_script = "uid://boqjeoefqersr"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StatusBars" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 4.0
+offset_right = 180.0
+offset_bottom = 24.0
+theme = SubResource("Theme_yqkxa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StatusBars"]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 40.0
+theme_override_constants/separation = 4
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player")]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+value = 76.0
+fill_mode = 1
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 5
+stretch_margin_right = 1
+stretch_margin_bottom = 5
+texture_under = ExtResource("22_wn8gv")
+texture_over = ExtResource("22_mi812")
+texture_progress = SubResource("GradientTexture2D_a5r0i")
+script = ExtResource("23_rdo4m")
+player = NodePath("../../../..")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player")]
+layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 2
+stretch_margin_right = 1
+stretch_margin_bottom = 2
+texture_over = ExtResource("22_mi812")
+texture_progress = ExtResource("24_yqkxa")
+script = ExtResource("24_rdo4m")
+player = NodePath("../../../..")
+
+[node name="MugShot" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(20, 28)
+texture = ExtResource("26_a5r0i")

@@ -10,16 +10,17 @@ var jump_punch_anim: String = "jump_punch"
 
 var kick_anim: String = "kick"
 var high_kick_anim: String = "high_kick"
-
-
-@export var damage: float = 0.0
 @export var hit_strength: HitEffects.HitStrength = HitEffects.HitStrength.LIGHT
 
 var finished: bool = false
 
 func enter() -> void:
+	var cost = get_stamina_cost(hit_strength)
+	if not player.use_stamina(cost):
+		return # Cancel attack if not enough stamina
 	finished = false
 	player.animation_player.animation_finished.connect(_on_anim_finished, CONNECT_ONE_SHOT)
+
 
 func exit() -> void:
 	var attack_box_shape: CollisionShape2D = player.attack_box.get_child(0)
@@ -27,3 +28,11 @@ func exit() -> void:
 
 func _on_anim_finished(_anim_name: StringName):
 	finished = true
+
+func get_stamina_cost(action: HitEffects.HitStrength) -> int:
+	match action:
+		HitEffects.HitStrength.LIGHT: return 5
+		HitEffects.HitStrength.MEDIUM: return 10
+		HitEffects.HitStrength.HEAVY: return 15
+		HitEffects.HitStrength.SUPER: return 25
+	return 0

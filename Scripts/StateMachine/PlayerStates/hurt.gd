@@ -24,7 +24,6 @@ var hurt_animation: String = "hurt"
 func enter() -> void:
 	super()
 	hurt_timer = medium_hitstun
-	
 	is_invincible = true
 	
 	# Cancel any current velocity
@@ -36,8 +35,6 @@ func enter() -> void:
 	
 	# Start invincibility frames
 	start_invincibility()
-	
-	
 	
 func exit() -> void:
 	super()
@@ -74,6 +71,14 @@ func process_physics(delta: float) -> State:
 ## Apply knockback based on attacker position
 func apply_knockback() -> void:
 	# Determine knockback direction
+	if (state_machine.previous_state == get_state("Parry") or 
+	state_machine.previous_state == get_state("CrouchParry")):
+		player.velocity = calculate_knockback() / 5
+	else:
+		player.velocity = calculate_knockback()
+
+func calculate_knockback() -> Vector2:
+	
 	var knockback_dir: float
 	
 	if attacker_position != Vector2.ZERO:
@@ -87,8 +92,8 @@ func apply_knockback() -> void:
 	var knockback_x = knockback_dir * medium_knockback
 	var knockback_y = -50.0  # Small upward component
 	
-	player.velocity = Vector2(knockback_x, knockback_y)
-
+	return Vector2(knockback_x, knockback_y)
+	
 ## Set knockback strength based on attack type
 func set_knockback_strength(strength: HitEffects.HitStrength) -> void:
 	var kb_amount: float

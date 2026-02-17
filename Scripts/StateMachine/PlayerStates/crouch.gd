@@ -17,3 +17,7 @@ func process_input(event: InputEvent) -> State:
 	if event.is_action_pressed("parry"): return get_state("CrouchParry")
 	if event.is_action_pressed("hurt"): return get_state("CrouchHurt")
 	return null
+	
+func process_physics(delta: float) -> State:
+	if Input.is_action_pressed("parry"): return get_state("CrouchParry")
+	return super(delta)

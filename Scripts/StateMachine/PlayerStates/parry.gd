@@ -10,3 +10,7 @@ func process_input(event: InputEvent) -> State:
 	if event.is_action_pressed("crouch"):
 		return get_state("CrouchParry")
 	return null
+	
+func process_physics(delta: float) -> State:
+	player.stamina = min(player.max_stamina, player.stamina - player.stamina_gain * 2 * delta)
+	return null

@@ -14,3 +14,6 @@ func process_input(event: InputEvent) -> State:
 		
 	return null
 	
+func process_physics(delta: float) -> State:
+	player.stamina = min(player.max_stamina, player.stamina - player.stamina_gain * 2 * delta)
+	return null

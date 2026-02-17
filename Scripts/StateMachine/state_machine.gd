@@ -5,7 +5,7 @@ class_name StateMachine
 @export var player: Player
 var states : Dictionary[String, State] = {}
 var current_state: State
-
+var previous_state: State
 
 func init() -> void:
 	_collect_states(self)
@@ -35,6 +35,7 @@ func process_physics(delta: float) -> void:
 
 func change_state(new_state: State) -> void:
 	if current_state: current_state.exit()
+	previous_state = current_state
 	current_state = new_state
 	current_state.enter()
 	print(current_state.name)

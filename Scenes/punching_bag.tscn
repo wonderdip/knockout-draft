@@ -7,7 +7,7 @@
 radius = 14.0
 height = 80.0
 
-[node name="PunchingBag" type="Node2D"]
+[node name="PunchingBag" type="Node2D" groups=["PunchingBag"]]
 script = ExtResource("1_ky4dj")
 
 [node name="Pivot" type="Marker2D" parent="."]
@@ -26,4 +26,3 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_4fixn")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
