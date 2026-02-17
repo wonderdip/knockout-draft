@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cfh10tllkcijw"]
+[gd_scene load_steps=55 format=3 uid="uid://cfh10tllkcijw"]
 
 [ext_resource type="Script" uid="uid://bcdx74myvi4j" path="res://Scripts/baki.gd" id="1_r6o28"]
 [ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Characters/Baki/Baki.png" id="2_64efi"]
@@ -13,18 +13,18 @@
 [ext_resource type="Script" uid="uid://d0il2jfedxq76" path="res://Scripts/StateMachine/PlayerStates/fall.gd" id="8_3bun3"]
 [ext_resource type="Script" uid="uid://bc8ujupfwfr65" path="res://Scripts/StateMachine/PlayerStates/landing.gd" id="9_3cnae"]
 [ext_resource type="Script" uid="uid://nktho56wdch5" path="res://Scripts/StateMachine/PlayerStates/AttackStates/strong_punch.gd" id="10_64vuf"]
-[ext_resource type="Script" uid="uid://ciadswjl2nag7" path="res://Scripts/StateMachine/PlayerStates/hurt.gd" id="12_5ipve"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/hurt.gd" id="12_5ipve"]
 [ext_resource type="Script" uid="uid://csgkdf8kcjqx1" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_light_punch.gd" id="12_ax4aj"]
-[ext_resource type="Script" uid="uid://51gjao34l8w6" path="res://Scripts/StateMachine/PlayerStates/crouch_hurt.gd" id="13_64efi"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/crouch_hurt.gd" id="13_64efi"]
 [ext_resource type="Script" uid="uid://buegw5vyhjll8" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_strong_punch.gd" id="13_jqp1r"]
 [ext_resource type="Script" uid="uid://b0rt5h2r8ndid" path="res://Scripts/StateMachine/PlayerStates/AttackStates/jump_punch.gd" id="14_5ae6y"]
 [ext_resource type="Script" uid="uid://b3aie60v8ljpr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/uppercut.gd" id="17_ergsl"]
 [ext_resource type="Script" uid="uid://58j3egyvj5pb" path="res://Scripts/StateMachine/PlayerStates/AttackStates/high_kick.gd" id="18_tg356"]
-[ext_resource type="Script" uid="uid://boqjeoefqersr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
 [ext_resource type="Texture2D" uid="uid://lddsv7h2584g" path="res://Assets/UI/HpBar.png" id="22_mi812"]
 [ext_resource type="Texture2D" uid="uid://dfoojng7d4ya1" path="res://Assets/UI/HpBg.png" id="22_wn8gv"]
 [ext_resource type="Script" uid="uid://bj7wafrii7107" path="res://Scripts/health_bar.gd" id="23_rdo4m"]
-[ext_resource type="Script" uid="uid://daym0c4jbr16k" path="res://Scripts/stamina_bar.gd" id="24_rdo4m"]
+[ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="24_rdo4m"]
 [ext_resource type="Texture2D" uid="uid://b28cbvk5ieien" path="res://Assets/UI/Stamina.png" id="24_yqkxa"]
 [ext_resource type="Texture2D" uid="uid://clb8pr4e8ql6r" path="res://Assets/Characters/Baki/BakiMugShot.png" id="26_a5r0i"]
 
@@ -1017,12 +1017,18 @@ height = 44.0
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a5r0i"]
 gradient = SubResource("Gradient_qdvrb")
 
+[sub_resource type="Gradient" id="Gradient_wn8gv"]
+offsets = PackedFloat32Array(0, 0.36666667, 0.5133333, 0.6933333, 1)
+colors = PackedColorArray(0.76, 0, 0, 1, 0.83012986, 0.45257145, 0.051428586, 1, 0.88, 0.7744, 0.08800002, 1, 0.6027397, 0.7919178, 0.08642465, 1, 0, 0.58, 0.057999942, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_36kfx"]
+gradient = SubResource("Gradient_wn8gv")
+
 [node name="Baki" type="CharacterBody2D" groups=["Player"]]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_r6o28")
 fighter_name = "Baki"
-stamina_gain = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1096,14 +1102,12 @@ metadata/_custom_type_script = "uid://bc8ujupfwfr65"
 
 [node name="Hurt" type="Node2D" parent="StateMachine"]
 script = ExtResource("12_5ipve")
-metadata/_custom_type_script = "uid://ciadswjl2nag7"
 
 [node name="CrouchHurt" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_64efi")
 light_knockback = 40.0
 medium_knockback = 60.0
 heavy_knockback = 100.0
-metadata/_custom_type_script = "uid://51gjao34l8w6"
 
 [node name="AttackStates" type="Node2D" parent="StateMachine"]
 
@@ -1113,7 +1117,7 @@ metadata/_custom_type_script = "uid://dfs7p5vm1nnjt"
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("10_64vuf")
-hit_strength = 2
+hit_strength = 1
 metadata/_custom_type_script = "uid://nktho56wdch5"
 
 [node name="CrouchLightPunch" type="Node2D" parent="StateMachine/AttackStates"]
@@ -1122,7 +1126,7 @@ metadata/_custom_type_script = "uid://csgkdf8kcjqx1"
 
 [node name="CrouchStrongPunch" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("13_jqp1r")
-hit_strength = 2
+hit_strength = 1
 metadata/_custom_type_script = "uid://buegw5vyhjll8"
 
 [node name="JumpPunch" type="Node2D" parent="StateMachine/AttackStates"]
@@ -1137,13 +1141,12 @@ metadata/_custom_type_script = "uid://b3aie60v8ljpr"
 
 [node name="HighKick" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("18_tg356")
-hit_strength = 1
+hit_strength = 2
 metadata/_custom_type_script = "uid://58j3egyvj5pb"
 
 [node name="Kick" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("19_houyy")
 hit_strength = 1
-metadata/_custom_type_script = "uid://boqjeoefqersr"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1159,7 +1162,7 @@ theme = SubResource("Theme_yqkxa")
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StatusBars"]
 layout_mode = 0
 offset_right = 140.0
-offset_bottom = 40.0
+offset_bottom = 20.0
 theme_override_constants/separation = 4
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player")]
@@ -1176,11 +1179,13 @@ texture_under = ExtResource("22_wn8gv")
 texture_over = ExtResource("22_mi812")
 texture_progress = SubResource("GradientTexture2D_a5r0i")
 script = ExtResource("23_rdo4m")
+health_gradient = SubResource("GradientTexture2D_36kfx")
 player = NodePath("../../../..")
 
 [node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player")]
 layout_mode = 2
 value = 100.0
+fill_mode = 1
 nine_patch_stretch = true
 stretch_margin_left = 1
 stretch_margin_top = 2
@@ -1194,3 +1199,4 @@ player = NodePath("../../../..")
 [node name="MugShot" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(20, 28)
 texture = ExtResource("26_a5r0i")
+hframes = 3

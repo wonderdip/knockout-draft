@@ -12,15 +12,17 @@ signal health_changed(new_health: float, max_health: float)
 @export var damage_multiplier: float = 1.0
 @export var attack_speed: float = 1.0
 @export var max_stamina: int = 100
-@export var stamina_gain: float = 50.0  # Stamina per second
+@export var stamina_gain: float = 10.0  # Stamina per second
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hurtbox_area: Area2D = $HurtboxArea
 @onready var hurtbox_collision_shape: CollisionShape2D = $HurtboxArea/HurtboxCollisionShape
+@onready var attack_box_collision_shape: CollisionShape2D = $AttackBox/AttackBoxCollisionShape
 @onready var attack_box: Area2D = $AttackBox
 @onready var hitbox: CollisionShape2D = $Hitbox
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var mug_shot: Sprite2D = $CanvasLayer/MugShot
 
 var is_invincible: bool = false
 var facing_direction: int = 1  # 1 = right, -1 = left

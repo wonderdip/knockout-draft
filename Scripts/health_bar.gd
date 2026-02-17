@@ -2,8 +2,7 @@ extends TextureProgressBar
 class_name GradientHealthBar
 
 @export var transition_speed: float = 150
-
-var target_value: float = 100.0
+@export var health_gradient: GradientTexture2D
 @export var player: Player = null
 
 var is_flashing := false
@@ -13,14 +12,10 @@ func _ready() -> void:
 	# Initialize with current health
 	max_value = player.max_health
 	value = player.current_health
-	target_value = player.current_health
 	update_gradient_colors(1)
 	
 func _process(delta: float) -> void:
-	if value != target_value:
-		value = move_toward(value, target_value, transition_speed * delta)
-		update_gradient_colors(value / max_value)
-
+	value = move_toward(value, player.current_health, transition_speed * delta)
 	if value/max_value <= 0.3 and not is_flashing:
 		flash_gradient()
 
@@ -30,7 +25,6 @@ func _input(event: InputEvent) -> void:
 
 func _on_health_changed(current: float, maximum: float) -> void:
 	max_value = maximum
-	target_value = current
 	update_gradient_colors(current / maximum)
 
 func flash_gradient():
@@ -51,20 +45,17 @@ func flash_gradient():
 
 ## Updates gradient colors based on health percentage
 func update_gradient_colors(percent: float) -> void:
-	var grad_texture = texture_progress as GradientTexture2D
-	var gradient = grad_texture.gradient
+	var grad_texture := texture_progress as GradientTexture2D
+	var gradient := grad_texture.gradient
 	
-	# Modify gradient colors based on health
-	# This creates a color shift effect
-	if percent > 0.7:
-		# Healthy - more green
-		gradient.set_color(0, Color.FOREST_GREEN)
-		gradient.set_color(1, Color.GREEN)
-	elif percent > 0.3:
-		# Damaged - yellow to orange
-		gradient.set_color(0, Color.ORANGE)
-		gradient.set_color(1, Color.YELLOW)
-	else:
-		# Critical - red
-		gradient.set_color(0, Color.WEB_MAROON)
-		gradient.set_color(1, Color.RED)
+	var col := health_gradient.gradient.sample(percent)
+	var col2 := health_gradient.gradient.sample(percent - 0.2)
+	
+	gradient.set_color(0, col)
+	gradient.set_color(1, col2)
+	
+	if percent <= 0.60:
+		player.mug_shot.frame = 1
+	if percent <= 0.25:
+		player.mug_shot.frame = 2
+		
