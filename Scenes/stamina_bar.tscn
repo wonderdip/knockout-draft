@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8wi02732rj0n"]
+
+[ext_resource type="Texture2D" uid="uid://lddsv7h2584g" path="res://Assets/UI/HpBar.png" id="1_dk0pf"]
+[ext_resource type="Texture2D" uid="uid://b28cbvk5ieien" path="res://Assets/UI/Stamina.png" id="2_qbfsp"]
+[ext_resource type="Script" uid="uid://daym0c4jbr16k" path="res://Scripts/stamina_bar.gd" id="3_6dmtv"]
+
+[node name="StaminaBar" type="TextureProgressBar" node_paths=PackedStringArray("player")]
+value = 100.0
+fill_mode = 1
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 2
+stretch_margin_right = 1
+stretch_margin_bottom = 2
+texture_over = ExtResource("1_dk0pf")
+texture_progress = ExtResource("2_qbfsp")
+script = ExtResource("3_6dmtv")
+player = NodePath("")

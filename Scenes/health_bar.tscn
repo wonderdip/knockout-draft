@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq1j8ndul5exb"]
+
+[ext_resource type="Texture2D" uid="uid://dfoojng7d4ya1" path="res://Assets/UI/HpBg.png" id="1_qay8w"]
+[ext_resource type="Texture2D" uid="uid://lddsv7h2584g" path="res://Assets/UI/HpBar.png" id="2_wjrfg"]
+[ext_resource type="Script" uid="uid://bj7wafrii7107" path="res://Scripts/health_bar.gd" id="3_ap322"]
+
+[sub_resource type="Gradient" id="Gradient_qdvrb"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5r0i"]
+gradient = SubResource("Gradient_qdvrb")
+
+[sub_resource type="Gradient" id="Gradient_wn8gv"]
+offsets = PackedFloat32Array(0, 0.36666667, 0.5133333, 0.6933333, 1)
+colors = PackedColorArray(0.76, 0, 0, 1, 0.83012986, 0.45257145, 0.051428586, 1, 0.88, 0.7744, 0.08800002, 1, 0.6027397, 0.7919178, 0.08642465, 1, 0, 0.58, 0.057999942, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_36kfx"]
+gradient = SubResource("Gradient_wn8gv")
+
+[node name="HealthBar" type="TextureProgressBar" node_paths=PackedStringArray("player")]
+custom_minimum_size = Vector2(0, 12)
+value = 76.0
+fill_mode = 1
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 5
+stretch_margin_right = 1
+stretch_margin_bottom = 5
+texture_under = ExtResource("1_qay8w")
+texture_over = ExtResource("2_wjrfg")
+texture_progress = SubResource("GradientTexture2D_a5r0i")
+script = ExtResource("3_ap322")
+health_gradient = SubResource("GradientTexture2D_36kfx")
+player = NodePath("")

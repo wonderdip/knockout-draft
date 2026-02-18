@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br7uups7ou8m"
-path="res://.godot/imported/BakiMugShot.png-3e289eeaa2290a3e906bc27c9321d2ca.ctex"
+uid="uid://clb8pr4e8ql6r"
+path="res://.godot/imported/BakiMugShotStates.png-052b94b75472660b55d65ed22ea9f41b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Baki/BakiMugShot.png"
-dest_files=["res://.godot/imported/BakiMugShot.png-3e289eeaa2290a3e906bc27c9321d2ca.ctex"]
+source_file="res://Assets/Characters/Baki/BakiMugShotStates.png"
+dest_files=["res://.godot/imported/BakiMugShotStates.png-052b94b75472660b55d65ed22ea9f41b.ctex"]
 
 [params]
 

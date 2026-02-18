@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cfh10tllkcijw"]
+[gd_scene load_steps=48 format=3 uid="uid://cfh10tllkcijw"]
 
 [ext_resource type="Script" uid="uid://bcdx74myvi4j" path="res://Scripts/baki.gd" id="1_r6o28"]
 [ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Characters/Baki/Baki.png" id="2_64efi"]
@@ -21,12 +21,9 @@
 [ext_resource type="Script" uid="uid://b3aie60v8ljpr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/uppercut.gd" id="17_ergsl"]
 [ext_resource type="Script" uid="uid://58j3egyvj5pb" path="res://Scripts/StateMachine/PlayerStates/AttackStates/high_kick.gd" id="18_tg356"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
-[ext_resource type="Texture2D" uid="uid://lddsv7h2584g" path="res://Assets/UI/HpBar.png" id="22_mi812"]
-[ext_resource type="Texture2D" uid="uid://dfoojng7d4ya1" path="res://Assets/UI/HpBg.png" id="22_wn8gv"]
-[ext_resource type="Script" uid="uid://bj7wafrii7107" path="res://Scripts/health_bar.gd" id="23_rdo4m"]
-[ext_resource type="Script" path="res://Scripts/stamina_bar.gd" id="24_rdo4m"]
-[ext_resource type="Texture2D" uid="uid://b28cbvk5ieien" path="res://Assets/UI/Stamina.png" id="24_yqkxa"]
-[ext_resource type="Texture2D" uid="uid://clb8pr4e8ql6r" path="res://Assets/Characters/Baki/BakiMugShot.png" id="26_a5r0i"]
+[ext_resource type="PackedScene" uid="uid://bq1j8ndul5exb" path="res://Scenes/health_bar.tscn" id="22_rdo4m"]
+[ext_resource type="PackedScene" uid="uid://c8wi02732rj0n" path="res://Scenes/stamina_bar.tscn" id="23_yqkxa"]
+[ext_resource type="Texture2D" uid="uid://clb8pr4e8ql6r" path="res://Assets/Characters/Baki/BakiMugShotStates.png" id="26_a5r0i"]
 
 [sub_resource type="Animation" id="Animation_qr76p"]
 length = 0.001
@@ -1012,18 +1009,6 @@ height = 44.0
 
 [sub_resource type="Theme" id="Theme_yqkxa"]
 
-[sub_resource type="Gradient" id="Gradient_qdvrb"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5r0i"]
-gradient = SubResource("Gradient_qdvrb")
-
-[sub_resource type="Gradient" id="Gradient_wn8gv"]
-offsets = PackedFloat32Array(0, 0.36666667, 0.5133333, 0.6933333, 1)
-colors = PackedColorArray(0.76, 0, 0, 1, 0.83012986, 0.45257145, 0.051428586, 1, 0.88, 0.7744, 0.08800002, 1, 0.6027397, 0.7919178, 0.08642465, 1, 0, 0.58, 0.057999942, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_36kfx"]
-gradient = SubResource("Gradient_wn8gv")
-
 [node name="Baki" type="CharacterBody2D" groups=["Player"]]
 z_index = 1
 collision_layer = 2
@@ -1165,35 +1150,12 @@ offset_right = 140.0
 offset_bottom = 20.0
 theme_override_constants/separation = 4
 
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player")]
-custom_minimum_size = Vector2(0, 12)
+[node name="HealthBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("22_rdo4m")]
 layout_mode = 2
-value = 76.0
-fill_mode = 1
-nine_patch_stretch = true
-stretch_margin_left = 1
-stretch_margin_top = 5
-stretch_margin_right = 1
-stretch_margin_bottom = 5
-texture_under = ExtResource("22_wn8gv")
-texture_over = ExtResource("22_mi812")
-texture_progress = SubResource("GradientTexture2D_a5r0i")
-script = ExtResource("23_rdo4m")
-health_gradient = SubResource("GradientTexture2D_36kfx")
 player = NodePath("../../../..")
 
-[node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player")]
+[node name="StaminaBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("23_yqkxa")]
 layout_mode = 2
-value = 100.0
-fill_mode = 1
-nine_patch_stretch = true
-stretch_margin_left = 1
-stretch_margin_top = 2
-stretch_margin_right = 1
-stretch_margin_bottom = 2
-texture_over = ExtResource("22_mi812")
-texture_progress = ExtResource("24_yqkxa")
-script = ExtResource("24_rdo4m")
 player = NodePath("../../../..")
 
 [node name="MugShot" type="Sprite2D" parent="CanvasLayer"]
