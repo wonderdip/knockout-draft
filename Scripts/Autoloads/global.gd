@@ -1,6 +1,6 @@
 extends Node
 
-var map: PackedScene = preload("res://Scenes/Maps/training_floor.tscn")
+@export var map: PackedScene = preload("res://Scenes/Maps/training_floor.tscn")
 
 var player_one_fighter: Fighter = null
 var player_two_fighter: Fighter = null
@@ -28,8 +28,11 @@ func start_game():
 func add_players():
 	add_child(player_one_fighter, true)
 	player_one_fighter.global_position = Vector2(64, 136)
+	player_one_fighter.player_number = 1
+	
 	add_child(player_two_fighter, true)
 	player_two_fighter.global_position = Vector2(320, 136)
+	player_two_fighter.player_number = 2
 	
 func change_map():
 	get_tree().change_scene_to_file(map.resource_path)

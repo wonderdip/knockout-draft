@@ -1,10 +1,8 @@
 extends Fighter
-class_name Baki
 
 # Signal must be defined at the top!
 signal health_changed(new_health: float, max_health: float)
 
-@onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hurtbox_area: Area2D = $HurtboxArea
 @onready var hurtbox_collision_shape: CollisionShape2D = $HurtboxArea/HurtboxCollisionShape
@@ -12,13 +10,9 @@ signal health_changed(new_health: float, max_health: float)
 @onready var attack_box: Area2D = $AttackBox
 @onready var hitbox: CollisionShape2D = $Hitbox
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var mug_shot: Sprite2D = $CanvasLayer/MugShot
+@onready var ui_layer: CanvasLayer = $UILayer
+@onready var mug_shot: Sprite2D = $UILayer/MugShot
 
-var is_invincible: bool = false
-var facing_direction: int = 1  # 1 = right, -1 = left
-var current_health: float = 100.0
-
-var stamina := 100.0
 
 func _ready() -> void:
 	state_machine.init()
@@ -35,23 +29,9 @@ func _ready() -> void:
 	
 	# Emit initial health for UI
 	health_changed.emit(current_health, max_health)
-	
-func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
-	
-	stamina = min(max_stamina, stamina + stamina_gain * delta)
-
-func _physics_process(delta: float) -> void:
-	state_machine.process_physics(delta)
-	
-func _input(event: InputEvent) -> void:
-	state_machine.process_input(event)
-
-func use_stamina(amount: float) -> bool:
-	if stamina < amount:
-		return false
-	stamina -= amount
-	return true
+	if player_number == 2:
+		ui_layer.scale.x = -1
+		ui_layer.offset.x = 384
 
 ## Called when player's attack connects with target
 func _on_attack_hit(area: Area2D) -> void:

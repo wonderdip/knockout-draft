@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_56js4"]
-[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
+[ext_resource type="Script" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
 [ext_resource type="PackedScene" uid="uid://duk3qjx5fde02" path="res://Scenes/punching_bag.tscn" id="3_hp1s1"]
 [ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="4_bch3r"]
 [ext_resource type="Texture2D" uid="uid://ci6e3htdet3sr" path="res://Assets/Maps/BuildingTop.png" id="5_fstxd"]

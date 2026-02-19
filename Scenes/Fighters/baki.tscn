@@ -13,14 +13,14 @@
 [ext_resource type="Script" uid="uid://d0il2jfedxq76" path="res://Scripts/StateMachine/PlayerStates/fall.gd" id="8_3bun3"]
 [ext_resource type="Script" uid="uid://bc8ujupfwfr65" path="res://Scripts/StateMachine/PlayerStates/landing.gd" id="9_3cnae"]
 [ext_resource type="Script" uid="uid://nktho56wdch5" path="res://Scripts/StateMachine/PlayerStates/AttackStates/strong_punch.gd" id="10_64vuf"]
-[ext_resource type="Script" uid="uid://ciadswjl2nag7" path="res://Scripts/StateMachine/PlayerStates/hurt.gd" id="12_5ipve"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/hurt.gd" id="12_5ipve"]
 [ext_resource type="Script" uid="uid://csgkdf8kcjqx1" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_light_punch.gd" id="12_ax4aj"]
-[ext_resource type="Script" uid="uid://51gjao34l8w6" path="res://Scripts/StateMachine/PlayerStates/crouch_hurt.gd" id="13_64efi"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/crouch_hurt.gd" id="13_64efi"]
 [ext_resource type="Script" uid="uid://buegw5vyhjll8" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_strong_punch.gd" id="13_jqp1r"]
 [ext_resource type="Script" uid="uid://b0rt5h2r8ndid" path="res://Scripts/StateMachine/PlayerStates/AttackStates/jump_punch.gd" id="14_5ae6y"]
 [ext_resource type="Script" uid="uid://b3aie60v8ljpr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/uppercut.gd" id="17_ergsl"]
 [ext_resource type="Script" uid="uid://58j3egyvj5pb" path="res://Scripts/StateMachine/PlayerStates/AttackStates/high_kick.gd" id="18_tg356"]
-[ext_resource type="Script" uid="uid://boqjeoefqersr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
 [ext_resource type="PackedScene" uid="uid://bq1j8ndul5exb" path="res://Scenes/health_bar.tscn" id="22_rdo4m"]
 [ext_resource type="PackedScene" uid="uid://c8wi02732rj0n" path="res://Scenes/stamina_bar.tscn" id="23_yqkxa"]
 [ext_resource type="Texture2D" uid="uid://clb8pr4e8ql6r" path="res://Assets/Characters/Baki/BakiMugShotStates.png" id="26_a5r0i"]
@@ -1009,11 +1009,12 @@ height = 44.0
 
 [sub_resource type="Theme" id="Theme_yqkxa"]
 
-[node name="Baki" type="CharacterBody2D" groups=["Player"]]
+[node name="Baki" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["Player"]]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_r6o28")
 fighter_name = "Baki"
+state_machine = NodePath("StateMachine")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1133,9 +1134,9 @@ metadata/_custom_type_script = "uid://58j3egyvj5pb"
 script = ExtResource("19_houyy")
 hit_strength = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="StatusBars" type="Control" parent="CanvasLayer"]
+[node name="StatusBars" type="Control" parent="UILayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 40.0
@@ -1144,21 +1145,21 @@ offset_right = 180.0
 offset_bottom = 24.0
 theme = SubResource("Theme_yqkxa")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StatusBars"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/StatusBars"]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 20.0
 theme_override_constants/separation = 4
 
-[node name="HealthBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("22_rdo4m")]
+[node name="HealthBar" parent="UILayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("22_rdo4m")]
 layout_mode = 2
 player = NodePath("../../../..")
 
-[node name="StaminaBar" parent="CanvasLayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("23_yqkxa")]
+[node name="StaminaBar" parent="UILayer/StatusBars/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("23_yqkxa")]
 layout_mode = 2
 player = NodePath("../../../..")
 
-[node name="MugShot" type="Sprite2D" parent="CanvasLayer"]
+[node name="MugShot" type="Sprite2D" parent="UILayer"]
 position = Vector2(20, 28)
 texture = ExtResource("26_a5r0i")
 hframes = 3

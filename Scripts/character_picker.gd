@@ -29,9 +29,12 @@ func _ready() -> void:
 	p2_outline.modulate = Color.RED
 	print(pads)
 
-	if pads.size() >= 2:
+	if pads.size() >= 1:
 		player_devices[1] = pads[0]
-		player_devices[2] = pads[1]
+		p1_outline.show()
+		if pads.size() >= 2:
+			p2_outline.show()
+			player_devices[2] = pads[1]
 
 	if buttons.is_empty():
 		collect_buttons(self)
@@ -69,6 +72,20 @@ func _unhandled_input(event):
 				p2_chosen_button = buttons[p2_index]
 				p2_chosen_button.choose(2)
 				
+		if event.is_action_pressed("ui_right"):
+			if player_id == 1:
+				p1_index = clamp(p1_index + 1, 0, buttons.size() - 1)
+			else:
+				p2_index = clamp(p2_index + 1, 0, buttons.size() - 1)
+			update_outlines()
+
+		if event.is_action_pressed("ui_left"):
+			if player_id == 1:
+				p1_index = clamp(p1_index - 1, 0, buttons.size() - 1)
+			else:
+				p2_index = clamp(p2_index - 1, 0, buttons.size() - 1)
+			update_outlines()
+			
 func _handle_analog(_index: int, axis_dir: int, hold_timer: float, player_id: int, delta: float):
 	var device = player_devices.get(player_id)
 	if device == null:
