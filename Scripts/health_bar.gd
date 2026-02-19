@@ -3,7 +3,7 @@ class_name GradientHealthBar
 
 @export var transition_speed: float = 150
 @export var health_gradient: GradientTexture2D
-@export var player: Player = null
+@export var player: Fighter = null
 
 var is_flashing := false
 

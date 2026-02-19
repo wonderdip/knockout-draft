@@ -1,4 +1,4 @@
-extends Player
+extends Fighter
 class_name Baki
 
 # Signal must be defined at the top!

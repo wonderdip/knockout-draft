@@ -1,7 +1,7 @@
 extends State
 class_name PlayerState
 
-var player: Player
+var player: Fighter
 
 #Animation Names
 var idle_anim: String = "idle"

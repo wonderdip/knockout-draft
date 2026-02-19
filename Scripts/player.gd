@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+class_name Fighter
 
 @export var fighter_name: String = ""
 @export var camera: CamShake

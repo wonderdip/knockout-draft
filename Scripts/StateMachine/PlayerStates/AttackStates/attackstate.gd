@@ -16,10 +16,10 @@ var finished: bool = false
 
 func enter() -> void:
 	var cost = get_stamina_cost(hit_strength)
-	print(cost)
 	if not player.use_stamina(cost):
 		return # Cancel attack if not enough stamina
 	finished = false
+	
 	if not player.animation_player.animation_finished.is_connected(_on_anim_finished):
 		player.animation_player.animation_finished.connect(_on_anim_finished, CONNECT_ONE_SHOT)
 

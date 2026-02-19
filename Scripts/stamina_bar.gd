@@ -1,9 +1,7 @@
 extends TextureProgressBar
 class_name StaminaBar
 
-
-
-@export var player: Player
+@export var player: Fighter
 
 func _ready() -> void:
 	max_value = player.max_stamina
