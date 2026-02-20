@@ -9,19 +9,21 @@ var is_flashing := false
 
 func _ready() -> void:
 	player.health_changed.connect(_on_health_changed)
-	# Initialize with current health
+
+	# Duplicate texture and gradient so this bar is unique
+	texture_progress = texture_progress.duplicate()
+	var grad_tex := texture_progress as GradientTexture2D
+	grad_tex.gradient = grad_tex.gradient.duplicate()
+
 	max_value = player.max_health
 	value = player.current_health
 	update_gradient_colors(1)
+
 	
 func _process(delta: float) -> void:
 	value = move_toward(value, player.current_health, transition_speed * delta)
 	if value/max_value <= 0.3 and not is_flashing:
 		flash_gradient()
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("hurt"):
-		player.take_damage(get_tree().get_first_node_in_group("PunchingBag"), HitEffects.HitStrength.MEDIUM)
 
 func _on_health_changed(current: float, maximum: float) -> void:
 	max_value = maximum

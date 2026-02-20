@@ -13,7 +13,6 @@ signal health_changed(new_health: float, max_health: float)
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var mug_shot: Sprite2D = $UILayer/MugShot
 
-
 func _ready() -> void:
 	state_machine.init()
 	animation_player.speed_scale = attack_speed
@@ -22,16 +21,22 @@ func _ready() -> void:
 	# Register camera with HitEffects singleton
 	if camera:
 		HitEffects.register_camera(camera)
-	
+	else:
+		camera = get_tree().get_first_node_in_group("Camera")
+		HitEffects.register_camera(camera)
+		
 	# Connect signals
 	attack_box.area_entered.connect(_on_attack_hit)
 	hurtbox_area.area_shape_entered.connect(_on_hurtbox_hit)
 	
 	# Emit initial health for UI
 	health_changed.emit(current_health, max_health)
+	
 	if player_number == 2:
 		ui_layer.scale.x = -1
+		mug_shot.scale.x = -1
 		ui_layer.offset.x = 384
+		scale.x = -1
 
 ## Called when player's attack connects with target
 func _on_attack_hit(area: Area2D) -> void:
@@ -98,7 +103,7 @@ func take_damage(attacker: Variant, hit_strength: HitEffects.HitStrength) -> voi
 	
 	# Determine which hurt state to use
 	var hurt_state_name = "Hurt"
-	if state_machine.current_state is PlayerCrouchState or Input.is_action_pressed("crouch"):
+	if state_machine.current_state is PlayerCrouchState or input_crouch:
 		hurt_state_name = "CrouchHurt"
 	
 	var hurt_state = state_machine.states.get(hurt_state_name)
@@ -114,13 +119,12 @@ func die() -> void:
 	print(fighter_name + " has been defeated!")
 	# Transition to death/KO state or restart scene
 	# You can implement this later
-	get_tree().reload_current_scene()
+	queue_free()
 
 ## Set invincibility state
 func set_invincible(invincible: bool) -> void:
 	is_invincible = invincible
 	
-	# Optionally change hurtbox collision layer during invincibility
 	if invincible:
 		hurtbox_collision_shape.set_deferred("disabled", true)
 	else:

@@ -26,16 +26,17 @@ func attack_inputs(event: InputEvent) -> State:
 	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
 	
 	if event.is_action_pressed("strong_punch"):
-		if Input.is_action_pressed("up"):
+		if player.input_up:
 			return get_state("Uppercut")
 		return get_state("StrongPunch")
 		
 	if event.is_action_pressed("kick"):
-		if Input.is_action_pressed("up"):
+		if player.input_up:
 			return get_state("HighKick")
 		return get_state("Kick")
 		
 	return null
+
 	
 func process_physics(delta: float) -> State:
 	player.velocity.y += gravity * delta
@@ -45,4 +46,11 @@ func process_physics(delta: float) -> State:
 	return null
 	
 func get_move_dir() -> float:
-	return Input.get_axis(left_key, right_key)
+	var axis := Input.get_joy_axis(player.device_id, JOY_AXIS_LEFT_X)
+	
+	var deadzone := 0.4
+	
+	if abs(axis) < deadzone:
+		return 0.0
+	
+	return axis

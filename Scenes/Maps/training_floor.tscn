@@ -1,13 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_56js4"]
-[ext_resource type="Script" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
-[ext_resource type="PackedScene" uid="uid://duk3qjx5fde02" path="res://Scenes/punching_bag.tscn" id="3_hp1s1"]
+[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
 [ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="4_bch3r"]
-[ext_resource type="Texture2D" uid="uid://ci6e3htdet3sr" path="res://Assets/Maps/BuildingTop.png" id="5_fstxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fstxd"]
 size = Vector2(384, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hp1s1"]
+size = Vector2(12, 216)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bch3r"]
+size = Vector2(12, 222)
 
 [node name="TrainingFloor" type="Node2D"]
 script = ExtResource("1_56js4")
@@ -16,9 +20,9 @@ script = ExtResource("1_56js4")
 position = Vector2(192, 108)
 texture = ExtResource("4_bch3r")
 
-[node name="BuildingTop" type="Sprite2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 position = Vector2(192, 108)
-texture = ExtResource("5_fstxd")
+script = ExtResource("2_fstxd")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 2
@@ -27,9 +31,12 @@ collision_mask = 2
 position = Vector2(192, 198)
 shape = SubResource("RectangleShape2D_fstxd")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(192, 108)
-script = ExtResource("2_fstxd")
+[node name="Wall" type="StaticBody2D" parent="."]
 
-[node name="PunchingBag" parent="." instance=ExtResource("3_hp1s1")]
-position = Vector2(276, 116)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-6, 108)
+shape = SubResource("RectangleShape2D_hp1s1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2(390, 105)
+shape = SubResource("RectangleShape2D_bch3r")

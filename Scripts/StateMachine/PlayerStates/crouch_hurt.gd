@@ -17,7 +17,7 @@ func exit() -> void:
 ## Override to return to crouch instead of idle
 func get_next_state() -> State:
 	if player.is_on_floor():
-		if Input.is_action_pressed("crouch"):
+		if player.input_crouch:
 			return get_state("Crouch")
 		else:
 			return get_state("Idle")

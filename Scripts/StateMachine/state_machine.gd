@@ -38,4 +38,4 @@ func change_state(new_state: State) -> void:
 	previous_state = current_state
 	current_state = new_state
 	current_state.enter()
-	print(current_state.name)
+	print(current_state.name, " ", player.player_number)

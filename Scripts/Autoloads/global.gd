@@ -8,8 +8,12 @@ var player_two_fighter: Fighter = null
 func character_chosen(player_id: int, fighter: Fighter):
 	if player_id == 1:
 		player_one_fighter = fighter
+		player_one_fighter.player_number = player_id
+		player_one_fighter.device_id = 0
 	elif player_id == 2:
 		player_two_fighter = fighter
+		player_two_fighter.player_number = player_id
+		player_two_fighter.device_id = 1
 
 func get_fighters() -> Array[Fighter]:
 	var result: Array[Fighter] = []
@@ -28,11 +32,9 @@ func start_game():
 func add_players():
 	add_child(player_one_fighter, true)
 	player_one_fighter.global_position = Vector2(64, 136)
-	player_one_fighter.player_number = 1
 	
 	add_child(player_two_fighter, true)
 	player_two_fighter.global_position = Vector2(320, 136)
-	player_two_fighter.player_number = 2
 	
 func change_map():
 	get_tree().change_scene_to_file(map.resource_path)

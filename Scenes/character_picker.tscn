@@ -17,9 +17,18 @@ script = ExtResource("1_n32q4")
 first_button = NodePath("Fighters/MugShots/BakiButton")
 
 [node name="Fighters" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 228.0
-offset_bottom = 54.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="FighterLabel" type="Label" parent="Fighters"]
 layout_mode = 2
@@ -78,10 +87,10 @@ metadata/_custom_type_script = "uid://d28y6igxnfup8"
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
-offset_left = 18.0
-offset_top = 90.0
-offset_right = 144.0
-offset_bottom = 136.0
+offset_left = 129.0
+offset_top = 94.0
+offset_right = 255.0
+offset_bottom = 125.0
 text = "Ready"
 
 [node name="P1Outline" type="Sprite2D" parent="."]

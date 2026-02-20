@@ -8,6 +8,7 @@ var p2_index := 1
 
 @onready var p1_outline: Sprite2D = $P1Outline
 @onready var p2_outline: Sprite2D = $P2Outline
+@onready var start: Button = $Start
 
 var p1_chosen_button: CharacterSelectorbutton = null
 var p2_chosen_button: CharacterSelectorbutton = null
@@ -20,31 +21,33 @@ var repeat_rate := 0.15      # Time between repeats after delay
 var p1_axis_direction := 0   # -1 = left, 1 = right, 0 = neutral
 var p2_axis_direction := 0
 var analog_deadzone := 0.5
+var can_start: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var pads = Input.get_connected_joypads()
-
 	p1_outline.modulate = Color.BLUE
 	p2_outline.modulate = Color.RED
-	print(pads)
-
-	if pads.size() >= 1:
-		player_devices[1] = pads[0]
-		p1_outline.show()
-		if pads.size() >= 2:
-			p2_outline.show()
-			player_devices[2] = pads[1]
-
+	assign_devices()
 	if buttons.is_empty():
 		collect_buttons(self)
-
+		
 	# Now buttons are ready
 	p1_index = 0
 	p2_index = min(1, buttons.size() - 1) # avoids out-of-bounds
 	p1_outline.global_position = buttons[p1_index].global_position + Vector2(19, 54)
 	p2_outline.global_position = buttons[p2_index].global_position + Vector2(57, 54)
 	
+func assign_devices():
+	var pads = Input.get_connected_joypads()
+	print(pads)
+	
+	if pads.size() >= 1:
+		player_devices[1] = pads[0]
+		p1_outline.show()
+		if pads.size() >= 2:
+			p2_outline.show()
+			player_devices[2] = pads[1]
+			
 func _unhandled_input(event):
 	if event is InputEvent:
 		var player_id := 0
@@ -53,16 +56,19 @@ func _unhandled_input(event):
 		elif event.device == player_devices.get(2):
 			player_id = 2
 			
-		if player_id == 0:
+			
+		if event.is_action_pressed("ui_escape"):
+			start.release_focus()
+			can_start = false
+			
+		if player_id == 0 or can_start:
 			return
 			
 		if event.is_action_pressed("select"):
 			if player_id == 1:
-				# Unchoose previous button if exists
 				if p1_chosen_button:
 					p1_chosen_button.unchoose()
 				
-				# Choose new button
 				p1_chosen_button = buttons[p1_index]
 				p1_chosen_button.choose(1)
 			else:
@@ -71,6 +77,7 @@ func _unhandled_input(event):
 				
 				p2_chosen_button = buttons[p2_index]
 				p2_chosen_button.choose(2)
+			update_start_state()
 				
 		if event.is_action_pressed("ui_right"):
 			if player_id == 1:
@@ -88,7 +95,7 @@ func _unhandled_input(event):
 			
 func _handle_analog(_index: int, axis_dir: int, hold_timer: float, player_id: int, delta: float):
 	var device = player_devices.get(player_id)
-	if device == null:
+	if device == null or can_start:
 		return
 
 	# Get horizontal axis
@@ -144,8 +151,19 @@ func _move_player(player_id: int, dir: int):
 	update_outlines()
 
 func _process(delta):
+	if Input.joy_connection_changed and Input.get_connected_joypads().size() < 2:
+		assign_devices()
+		
 	_handle_analog(p1_index, p1_axis_direction, p1_hold_timer, 1, delta)
 	_handle_analog(p2_index, p2_axis_direction, p2_hold_timer, 2, delta)
+
+func update_start_state():
+	if p1_chosen_button != null and p2_chosen_button != null:
+		start.grab_focus()
+		can_start = true
+	else:
+		start.release_focus()
+		can_start = false
 
 func update_outlines():
 	p1_outline.global_position = buttons[p1_index].global_position + Vector2(19, 27)
@@ -162,5 +180,5 @@ func _on_character_chosen(player_id: int, fighter: Fighter):
 	Global.character_chosen(player_id, fighter)
 	
 func _on_start_pressed() -> void:
-	if Global.get_fighters().size() == 2:
+	if can_start:
 		Global.start_game()

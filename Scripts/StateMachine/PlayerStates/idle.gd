@@ -17,7 +17,10 @@ func process_physics(delta: float) -> State:
 	if get_move_dir() != 0:
 		return get_state("Walk")
 	
-	if Input.is_action_pressed("crouch"): return get_state("Crouch")
-	if Input.is_action_pressed("parry"): return get_state("Parry")
-	
+	if player.input_crouch:
+		return get_state("Crouch")
+		
+	if player.input_parry:
+		return get_state("Parry")
+		
 	return super(delta)

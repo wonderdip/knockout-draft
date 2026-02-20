@@ -16,6 +16,3 @@ func process_physics(delta: float) -> State:
 		return get_state("Idle")
 			
 	return super(delta)
-	
-func get_move_dir() -> float:
-	return Input.get_axis(left_key, right_key)
