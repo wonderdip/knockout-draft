@@ -37,5 +37,6 @@ func add_players():
 	player_two_fighter.global_position = Vector2(320, 136)
 	
 func change_map():
+
 	get_tree().change_scene_to_file(map.resource_path)
 	

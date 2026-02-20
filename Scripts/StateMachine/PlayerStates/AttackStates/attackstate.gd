@@ -19,14 +19,15 @@ func enter() -> void:
 	if not player.use_stamina(cost):
 		return # Cancel attack if not enough stamina
 	finished = false
-	
+	player.z_index += 1
 	if not player.animation_player.animation_finished.is_connected(_on_anim_finished):
 		player.animation_player.animation_finished.connect(_on_anim_finished, CONNECT_ONE_SHOT)
 
 func exit() -> void:
 	var attack_box_shape: CollisionShape2D = player.attack_box_collision_shape
 	attack_box_shape.shape.height = 44
-	attack_box_shape.disabled = true
+	attack_box_shape.set_deferred("disabled", true)
+	player.z_index -= 1
 	
 func _on_anim_finished(_anim_name: StringName):
 	finished = true

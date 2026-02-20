@@ -7,7 +7,12 @@ func enter() -> void:
 	
 
 func process_input(event: InputEvent) -> State:
-	if event.is_action_pressed("jump"): return get_state("Jump")
+	if event.is_action_pressed("jump"): 
+		var deadzone := 0.4
+		var axis = Input.get_joy_axis(player.player_number, JOY_AXIS_LEFT_Y)
+		if abs(axis) < deadzone:
+			return get_state("Jump")
+			
 	if event.is_action_pressed("crouch"): return get_state("Crouch")
 	if event.is_action_pressed("parry"): return get_state("Parry")
 	

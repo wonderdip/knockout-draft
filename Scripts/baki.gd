@@ -17,13 +17,6 @@ func _ready() -> void:
 	state_machine.init()
 	animation_player.speed_scale = attack_speed
 	current_health = max_health
-	
-	# Register camera with HitEffects singleton
-	if camera:
-		HitEffects.register_camera(camera)
-	else:
-		camera = get_tree().get_first_node_in_group("Camera")
-		HitEffects.register_camera(camera)
 		
 	# Connect signals
 	attack_box.area_entered.connect(_on_attack_hit)
@@ -106,8 +99,13 @@ func take_damage(attacker: Variant, hit_strength: HitEffects.HitStrength) -> voi
 	if state_machine.current_state is PlayerCrouchState or input_crouch:
 		hurt_state_name = "CrouchHurt"
 	
+	
 	var hurt_state = state_machine.states.get(hurt_state_name)
 	if hurt_state and hurt_state is PlayerHurtState:
+		if (state_machine.current_state is PlayerCrouchParryState 
+		or state_machine.current_state is PlayerParryState):
+			return
+			
 		# Store attacker position for knockback calculation
 		hurt_state.attacker_position = attacker.global_position
 		# Set knockback strength based on attack type

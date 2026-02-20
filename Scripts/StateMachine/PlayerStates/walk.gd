@@ -17,8 +17,12 @@ func process_physics(delta):
 	return super(delta)
 	
 func process_input(event: InputEvent) -> State:
-	
-	if event.is_action_pressed("jump"): return get_state("Jump")
+	if event.is_action_pressed("jump"): 
+		var deadzone := 0.8
+		var axis = Input.get_joy_axis(player.device_id, JOY_AXIS_LEFT_Y)
+		if abs(axis) < deadzone:
+			return get_state("Jump")
+			
 	if event.is_action_pressed("parry"): return get_state("Parry")
 	return attack_inputs(event)
 	
