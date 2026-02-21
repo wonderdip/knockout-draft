@@ -1,7 +1,48 @@
-extends Fighter
+extends CharacterBody2D
+class_name Fighter
 
 # Signal must be defined at the top!
 signal health_changed(new_health: float, max_health: float)
+
+@export var fighter_name: String = ""
+@export var state_machine: StateMachine
+@export var camera: CamShake
+
+@export_group("Stats")
+@export var max_health: float = 100.0
+@export var damage_multiplier: float = 1.0
+@export var attack_speed: float = 1.0
+@export var max_stamina: int = 100
+@export var stamina_gain: float = 10.0  # Stamina per second
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hurtbox_area: Area2D = $HurtboxArea
+@onready var hurtbox_collision_shape: CollisionShape2D = $HurtboxArea/HurtboxCollisionShape
+@onready var attack_box: Area2D = $AttackPivot/AttackBox
+@onready var attack_box_collision_shape: CollisionShape2D = $AttackPivot/AttackBox/AttackBoxCollisionShape
+@onready var attack_pivot: Node2D = $AttackPivot
+
+@onready var hitbox: CollisionShape2D = $Hitbox
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var ui_layer: CanvasLayer = $UILayer
+@onready var mug_shot: Sprite2D = $UILayer/MugShot
+
+var player_number: int = 0
+var device_id: int = 0
+var other_fighter: Fighter
+
+var is_invincible: bool = false
+var facing_direction: int = 1  # 1 = right, -1 = left
+var current_health: float = 100.0
+
+var input_crouch := false
+var input_parry := false
+var input_jump := false
+
+var input_up := false
+var input_down := false
+
+var stamina := 100.0
 
 func _ready() -> void:
 	state_machine.init()
@@ -19,7 +60,9 @@ func _ready() -> void:
 		ui_layer.scale.x = -1
 		mug_shot.scale.x = -1
 		ui_layer.offset.x = 384
-
+		sprite_2d.scale.x = -1
+		attack_pivot.scale.x = -1
+		
 ## Called when player's attack connects with target
 func _on_attack_hit(area: Area2D) -> void:
 	var current_state = state_machine.current_state
@@ -121,3 +164,51 @@ func set_invincible(invincible: bool) -> void:
 func heal(amount: float) -> void:
 	current_health = min(current_health + amount, max_health)
 	health_changed.emit(current_health, max_health)
+
+func use_stamina(amount: float) -> bool:
+	if stamina < amount:
+		return false
+	stamina -= amount
+	return true
+
+func change_direction(dir: float):
+	sprite_2d.scale.x = dir
+	attack_pivot.scale.x = dir
+
+func _process(delta: float) -> void:
+	state_machine.process_frame(delta)
+	stamina = min(max_stamina, stamina + stamina_gain * delta)
+		
+func _physics_process(delta: float) -> void:
+	state_machine.process_physics(delta)
+	
+func _input(event: InputEvent) -> void:
+	if event.device != device_id:
+		return
+	
+	if event.is_action_pressed("crouch"):
+		input_crouch = true
+	if event.is_action_released("crouch"):
+		input_crouch = false
+		
+	if event.is_action_pressed("parry"):
+		input_parry = true
+	if event.is_action_released("parry"):
+		input_parry = false
+		
+	if event.is_action_pressed("jump"):
+		input_jump = true
+	if event.is_action_released("jump"):
+		input_jump = false
+		
+	if event.is_action_pressed("up"):
+		input_up = true
+	if event.is_action_released("up"):
+		input_up = false
+		
+	#if event.is_action_pressed("down"):
+		#input_down = true
+	#if event.is_action_released("down"):
+		#input_down = false
+	
+	state_machine.process_input(event)

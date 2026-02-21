@@ -1,6 +1,6 @@
 [gd_scene load_steps=52 format=3 uid="uid://cfh10tllkcijw"]
 
-[ext_resource type="Script" uid="uid://bcdx74myvi4j" path="res://Scripts/baki.gd" id="1_r6o28"]
+[ext_resource type="Script" uid="uid://bjejuoreank15" path="res://Scripts/fighter.gd" id="1_4ssuy"]
 [ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Characters/Baki/Baki.png" id="2_64efi"]
 [ext_resource type="Script" uid="uid://lubqi53sqw2g" path="res://Scripts/StateMachine/state_machine.gd" id="3_qr76p"]
 [ext_resource type="Script" uid="uid://dp1k5h8ndjx2" path="res://Scripts/StateMachine/PlayerStates/idle.gd" id="4_md325"]
@@ -42,7 +42,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -54,7 +54,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -90,7 +90,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -102,7 +102,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("AttackBox/AttackBoxCollisionShape:shape:height")
+tracks/6/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:height")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -230,7 +230,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/4/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -258,7 +258,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -270,7 +270,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -306,7 +306,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -422,7 +422,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox:position")
+tracks/3/path = NodePath("AttackPivot/AttackBox:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -434,7 +434,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox:rotation")
+tracks/4/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -446,7 +446,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -526,7 +526,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox:position")
+tracks/3/path = NodePath("AttackPivot/AttackBox:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -538,7 +538,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox:rotation")
+tracks/4/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -550,7 +550,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -590,7 +590,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/1/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -675,7 +675,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox:position")
+tracks/3/path = NodePath("AttackPivot/AttackBox:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -687,7 +687,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox:rotation")
+tracks/4/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -699,7 +699,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -727,7 +727,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -739,7 +739,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -751,7 +751,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/3/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -795,7 +795,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -807,7 +807,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -819,7 +819,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/3/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -863,7 +863,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -875,7 +875,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -887,7 +887,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/3/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -915,7 +915,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackBox:position")
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -927,7 +927,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackBox:rotation")
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -939,7 +939,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackBox/AttackBoxCollisionShape:disabled")
+tracks/3/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -951,7 +951,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackBox/AttackBoxCollisionShape:shape:height")
+tracks/4/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:height")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1001,12 +1001,12 @@ _data = {
 &"walk": SubResource("Animation_r6o28")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_houyy"]
+height = 44.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ipve"]
 resource_local_to_scene = true
 height = 74.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_houyy"]
-height = 44.0
 
 [sub_resource type="Theme" id="Theme_yqkxa"]
 
@@ -1027,11 +1027,13 @@ gradient = SubResource("Gradient_wn8gv")
 [node name="Baki" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["Player"]]
 z_index = 1
 collision_layer = 2
-script = ExtResource("1_r6o28")
+script = ExtResource("1_4ssuy")
 fighter_name = "Baki"
 state_machine = NodePath("StateMachine")
+metadata/_custom_type_script = "uid://bjejuoreank15"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 0
 libraries = {
 &"": SubResource("AnimationLibrary_md325")
 }
@@ -1040,6 +1042,17 @@ libraries = {
 texture = ExtResource("2_64efi")
 hframes = 5
 vframes = 7
+
+[node name="AttackPivot" type="Node2D" parent="."]
+
+[node name="AttackBox" type="Area2D" parent="AttackPivot"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="AttackBoxCollisionShape" type="CollisionShape2D" parent="AttackPivot/AttackBox"]
+shape = SubResource("CapsuleShape2D_houyy")
+disabled = true
+debug_color = Color(0.99406785, 0, 0.23507595, 0.41960785)
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5ipve")
@@ -1051,15 +1064,6 @@ collision_mask = 8
 
 [node name="HurtboxCollisionShape" type="CollisionShape2D" parent="HurtboxArea"]
 shape = SubResource("CapsuleShape2D_5ipve")
-
-[node name="AttackBox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 4
-
-[node name="AttackBoxCollisionShape" type="CollisionShape2D" parent="AttackBox"]
-shape = SubResource("CapsuleShape2D_houyy")
-disabled = true
-debug_color = Color(0.99406785, 0, 0.23507595, 0.41960785)
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("starting_state", "player")]
 script = ExtResource("3_qr76p")

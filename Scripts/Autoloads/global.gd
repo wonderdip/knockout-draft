@@ -25,18 +25,18 @@ func get_fighters() -> Array[Fighter]:
 		result.append(player_two_fighter)
 	
 	return result
-	
+
 func _process(delta: float) -> void:
 	if player_one_fighter and player_two_fighter:
 		if player_one_fighter.is_inside_tree() and player_two_fighter.is_inside_tree():
-			
-			if player_one_fighter.global_position.x > player_two_fighter.global_position.x:
-				player_one_fighter.set_facing(-1)
-				player_two_fighter.set_facing(1)
+			var player_distance: float = player_one_fighter.global_position.x - player_two_fighter.global_position.x
+			if player_distance > 0:
+				player_one_fighter.change_direction(-1)
+				player_two_fighter.change_direction(1)
 			else:
-				player_one_fighter.set_facing(1)
-				player_two_fighter.set_facing(-1)
-		
+				player_one_fighter.change_direction(1)
+				player_two_fighter.change_direction(-1)
+	pass
 func start_game():
 	game_started = true
 	change_map()
@@ -45,9 +45,10 @@ func start_game():
 func add_players():
 	add_child(player_one_fighter, true)
 	player_one_fighter.global_position = Vector2(64 + 50, 136)
-	
+	player_one_fighter.other_fighter = player_two_fighter
 	add_child(player_two_fighter, true)
 	player_two_fighter.global_position = Vector2(320-50, 136)
+	player_two_fighter.other_fighter = player_one_fighter
 	
 func change_map():
 
