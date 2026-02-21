@@ -39,7 +39,6 @@ func _ready() -> void:
 	
 func assign_devices():
 	var pads = Input.get_connected_joypads()
-	print(pads)
 	
 	if pads.size() >= 1:
 		player_devices[1] = pads[0]
@@ -47,6 +46,7 @@ func assign_devices():
 		if pads.size() >= 2:
 			p2_outline.show()
 			player_devices[2] = pads[1]
+			print(pads)
 			
 func _unhandled_input(event):
 	if event is InputEvent:
@@ -151,7 +151,7 @@ func _move_player(player_id: int, dir: int):
 	update_outlines()
 
 func _process(delta):
-	if Input.joy_connection_changed and Input.get_connected_joypads().size() < 2:
+	if Input.joy_connection_changed and Input.get_connected_joypads().size() <= 2:
 		assign_devices()
 		
 	_handle_analog(p1_index, p1_axis_direction, p1_hold_timer, 1, delta)

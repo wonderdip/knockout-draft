@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
+[gd_scene load_steps=8 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_56js4"]
-[ext_resource type="Script" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
+[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
+[ext_resource type="PackedScene" uid="uid://duk3qjx5fde02" path="res://Scenes/punching_bag.tscn" id="4_56js4"]
 [ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="4_bch3r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fstxd"]
@@ -40,3 +41,6 @@ shape = SubResource("RectangleShape2D_hp1s1")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
 position = Vector2(390, 105)
 shape = SubResource("RectangleShape2D_bch3r")
+
+[node name="PunchingBag" parent="." instance=ExtResource("4_56js4")]
+position = Vector2(172, 128)

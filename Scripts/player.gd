@@ -11,6 +11,18 @@ class_name Fighter
 @export var attack_speed: float = 1.0
 @export var max_stamina: int = 100
 @export var stamina_gain: float = 10.0  # Stamina per second
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hurtbox_area: Area2D = $HurtboxArea
+@onready var hurtbox_collision_shape: CollisionShape2D = $HurtboxArea/HurtboxCollisionShape
+@onready var attack_box_collision_shape: CollisionShape2D = $AttackBox/AttackBoxCollisionShape
+@onready var attack_box: Area2D = $AttackBox
+
+@onready var hitbox: CollisionShape2D = $Hitbox
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var ui_layer: CanvasLayer = $UILayer
+@onready var mug_shot: Sprite2D = $UILayer/MugShot
+
 var player_number: int = 0
 var device_id: int = 0
 
@@ -32,7 +44,13 @@ func use_stamina(amount: float) -> bool:
 		return false
 	stamina -= amount
 	return true
+func set_facing(dir: int):
+	if facing_direction == dir:
+		return # prevent unnecessary flipping
 	
+	facing_direction = dir
+	sprite_2d.scale.x = facing_direction
+
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	stamina = min(max_stamina, stamina + stamina_gain * delta)

@@ -46,11 +46,12 @@ func process_physics(delta: float) -> State:
 	return null
 	
 func get_move_dir() -> float:
-	var axis := Input.get_joy_axis(player.device_id, JOY_AXIS_LEFT_X)
+	var left  := Input.is_joy_button_pressed(player.device_id, JOY_BUTTON_DPAD_LEFT)
+	var right := Input.is_joy_button_pressed(player.device_id, JOY_BUTTON_DPAD_RIGHT)
+
+	if right:
+		return 1.0
+	elif left:
+		return -1.0
 	
-	var deadzone := 0.4
-	
-	if abs(axis) < deadzone:
-		return 0.0
-	
-	return axis
+	return 0.0

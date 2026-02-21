@@ -20,6 +20,7 @@ func enter() -> void:
 		return # Cancel attack if not enough stamina
 	finished = false
 	player.z_index += 1
+	
 	if not player.animation_player.animation_finished.is_connected(_on_anim_finished):
 		player.animation_player.animation_finished.connect(_on_anim_finished, CONNECT_ONE_SHOT)
 

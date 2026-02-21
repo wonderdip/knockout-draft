@@ -20,33 +20,33 @@ func play_hit_effect(strength: HitStrength) -> void:
 
 ## Light hit effect
 func play_light_hit() -> void:
-	await frame_freeze(0.05, 0)
+	frame_freeze(0.15, 0)
 	if camera:
 		camera.cam_shake(2, 0.5, 0.1)
 
 ## Medium hit effect
 func play_medium_hit() -> void:
-	await frame_freeze(0.08, 0)
+	frame_freeze(0.15, 0)
 	if camera:
 		camera.cam_shake(4, 1, 0.15)
 
 ## Heavy hit effect
 func play_heavy_hit() -> void:
-	await frame_freeze(0.12, 0)
+	frame_freeze(0.2, 0)
 	
 	if camera:
 		camera.cam_shake(6, 1.5, 0.2)
 
 ## Super/critical hit effect
 func play_super_hit() -> void:
-	await frame_freeze(0.2, 0)
+	frame_freeze(0.25, 0)
 	if camera:
 		camera.cam_shake(8, 2, 0.3)
 
 ## Freezes the frame for a duration
 func frame_freeze(duration: float, time_scale: float) -> void:
 	Engine.time_scale = time_scale
-	await get_tree().create_timer(duration * maxf(time_scale, 0.001), true, false, true).timeout
+	await get_tree().create_timer(duration, true, false, true).timeout
 	Engine.time_scale = 1.0
 
 ## Enum for hit strength levels

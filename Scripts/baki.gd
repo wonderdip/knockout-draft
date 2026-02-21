@@ -3,16 +3,6 @@ extends Fighter
 # Signal must be defined at the top!
 signal health_changed(new_health: float, max_health: float)
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var hurtbox_area: Area2D = $HurtboxArea
-@onready var hurtbox_collision_shape: CollisionShape2D = $HurtboxArea/HurtboxCollisionShape
-@onready var attack_box_collision_shape: CollisionShape2D = $AttackBox/AttackBoxCollisionShape
-@onready var attack_box: Area2D = $AttackBox
-@onready var hitbox: CollisionShape2D = $Hitbox
-@onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var ui_layer: CanvasLayer = $UILayer
-@onready var mug_shot: Sprite2D = $UILayer/MugShot
-
 func _ready() -> void:
 	state_machine.init()
 	animation_player.speed_scale = attack_speed
@@ -29,7 +19,6 @@ func _ready() -> void:
 		ui_layer.scale.x = -1
 		mug_shot.scale.x = -1
 		ui_layer.offset.x = 384
-		scale.x = -1
 
 ## Called when player's attack connects with target
 func _on_attack_hit(area: Area2D) -> void:

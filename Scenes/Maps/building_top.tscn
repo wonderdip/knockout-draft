@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_8gv0t"]
 [ext_resource type="Texture2D" uid="uid://cgbpciqdng03l" path="res://Assets/Maps/Skybox/CloudLayer.png" id="2_8gv0t"]
 [ext_resource type="Texture2D" uid="uid://ci6e3htdet3sr" path="res://Assets/Maps/BuildingTop.png" id="3_d4f34"]
-[ext_resource type="Script" path="res://Scripts/camera_shake.gd" id="4_rhsup"]
+[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="4_rhsup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbmvt"]
 size = Vector2(384, 36)
