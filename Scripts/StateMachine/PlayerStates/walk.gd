@@ -22,7 +22,7 @@ func process_input(event: InputEvent) -> State:
 		var axis = Input.get_joy_axis(player.device_id, JOY_AXIS_LEFT_Y)
 		if abs(axis) < deadzone:
 			return get_state("Jump")
-			
+	if event.is_action_pressed("light_punch"): return get_state("ForwardLightPunch")
 	if event.is_action_pressed("parry"): return get_state("Parry")
 	return attack_inputs(event)
 	

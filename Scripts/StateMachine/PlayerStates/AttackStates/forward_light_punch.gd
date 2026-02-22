@@ -1,9 +1,9 @@
 extends PlayerAttackState
-class_name PlayerUppercutState
+class_name PlayerForwardLightPunchState
 
 func enter():
 	super()
-	player.animation_player.play(uppercut_anim)
+	player.animation_player.play(forward_light_punch_anim)
 
 func process_physics(delta):
 	if finished:

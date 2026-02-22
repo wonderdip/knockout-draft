@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmrxtaee8x6ma"]
+[gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_56js4"]
-[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="2_fstxd"]
-[ext_resource type="PackedScene" uid="uid://duk3qjx5fde02" path="res://Scenes/punching_bag.tscn" id="4_56js4"]
+[ext_resource type="PackedScene" uid="uid://h7ggmrg7govk" path="res://Scenes/dynamic_camera.tscn" id="3_dalrq"]
 [ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="4_bch3r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fstxd"]
@@ -18,14 +17,11 @@ size = Vector2(12, 222)
 script = ExtResource("1_56js4")
 
 [node name="TrainingFloorSprite" type="Sprite2D" parent="."]
-position = Vector2(192, 108)
+position = Vector2(160, 108)
 texture = ExtResource("4_bch3r")
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
-position = Vector2(192, 108)
-script = ExtResource("2_fstxd")
-
 [node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(-32, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
@@ -33,6 +29,7 @@ position = Vector2(192, 198)
 shape = SubResource("RectangleShape2D_fstxd")
 
 [node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(-32, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 position = Vector2(-6, 108)
@@ -42,5 +39,4 @@ shape = SubResource("RectangleShape2D_hp1s1")
 position = Vector2(390, 105)
 shape = SubResource("RectangleShape2D_bch3r")
 
-[node name="PunchingBag" parent="." instance=ExtResource("4_56js4")]
-position = Vector2(172, 128)
+[node name="DynamicCamera" parent="." instance=ExtResource("3_dalrq")]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://h7ggmrg7govk"]
+
+[ext_resource type="Script" uid="uid://bum5si7xsiohl" path="res://Scripts/camera_shake.gd" id="1_b0xwp"]
+
+[node name="DynamicCamera" type="Camera2D" groups=["Camera"]]
+limit_bottom = 216
+script = ExtResource("1_b0xwp")
+stage_left = -32.0
+stage_right = 352.0

@@ -24,16 +24,10 @@ func get_state(state_name: String) -> PlayerState:
 
 func attack_inputs(event: InputEvent) -> State:
 	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
-	
-	if event.is_action_pressed("strong_punch"):
-		if player.input_up:
-			return get_state("Uppercut")
-		return get_state("StrongPunch")
+	if event.is_action_pressed("strong_punch"): return get_state("StrongPunch")
 		
-	if event.is_action_pressed("kick"):
-		if player.input_up:
-			return get_state("HighKick")
-		return get_state("Kick")
+	if event.is_action_pressed("light_kick"): return get_state("Kick")
+	if event.is_action_pressed("strong_kick"): return get_state("HighKick")
 		
 	return null
 

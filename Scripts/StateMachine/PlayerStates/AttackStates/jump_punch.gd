@@ -10,9 +10,10 @@ func exit() -> void:
 	player.hurtbox_collision_shape.position = Vector2(0, 0)
 	player.hitbox.position = Vector2(0, 0)
 	player.hitbox.shape.height = 74.0
-	
 
 func process_physics(delta):
+	player.velocity.x = get_move_dir() * air_speed
+	
 	if finished:
 		return get_state("Fall")
 	if player.is_on_floor():

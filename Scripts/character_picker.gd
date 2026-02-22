@@ -1,6 +1,5 @@
 extends Control
 
-@export var first_button: CharacterSelectorbutton
 var buttons: Array[CharacterSelectorbutton]
 var player_devices := {}
 var p1_index := 0
@@ -46,7 +45,6 @@ func assign_devices():
 		if pads.size() >= 2:
 			p2_outline.show()
 			player_devices[2] = pads[1]
-			print(pads)
 			
 func _unhandled_input(event):
 	if event is InputEvent:

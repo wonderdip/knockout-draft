@@ -1,6 +1,6 @@
 extends Node
 
-var camera: CamShake
+var camera: DynamicCamera
 
 ## Registers the camera for shake effects
 func register_camera(cam: Camera2D) -> void:

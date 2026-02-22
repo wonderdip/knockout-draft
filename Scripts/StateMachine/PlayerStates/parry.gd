@@ -2,6 +2,10 @@ extends PlayerState
 class_name PlayerParryState
 
 func enter() -> void:
+	var cost = 10
+	if not player.use_stamina(cost):
+		return # Cancel attack if not enough stamina
+		
 	player.velocity.x = 0.0
 	player.animation_player.play(parry_anim)
 	
@@ -11,6 +15,3 @@ func process_input(event: InputEvent) -> State:
 		return get_state("CrouchParry")
 	return null
 	
-func process_physics(delta: float) -> State:
-	player.stamina = min(player.max_stamina, player.stamina - player.stamina_gain * 3 * delta)
-	return null

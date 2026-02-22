@@ -14,8 +14,9 @@ func process_input(event: InputEvent) -> State:
 	if event.is_action_released("crouch"): return get_state("Idle")
 	if event.is_action_pressed("light_punch"): return get_state("CrouchLightPunch")
 	if event.is_action_pressed("strong_punch"): return get_state("CrouchStrongPunch")
+	if event.is_action_pressed("light_kick"): return get_state("CrouchLightKick")
+	if event.is_action_pressed("strong_kick"): return get_state("CrouchStrongKick")
 	if event.is_action_pressed("parry"): return get_state("CrouchParry")
-	if event.is_action_pressed("hurt"): return get_state("CrouchHurt")
 	return null
 	
 func process_physics(delta: float) -> State:

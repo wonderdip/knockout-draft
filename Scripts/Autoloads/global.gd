@@ -37,20 +37,21 @@ func _process(delta: float) -> void:
 				player_one_fighter.change_direction(1)
 				player_two_fighter.change_direction(-1)
 	pass
+	
 func start_game():
 	game_started = true
-	change_map()
+	await get_tree().change_scene_to_packed(map)
 	add_players()
-	
+
 func add_players():
 	add_child(player_one_fighter, true)
-	player_one_fighter.global_position = Vector2(64 + 50, 136)
-	player_one_fighter.other_fighter = player_two_fighter
 	add_child(player_two_fighter, true)
-	player_two_fighter.global_position = Vector2(320-50, 136)
+	
+	player_one_fighter.other_fighter = player_two_fighter
 	player_two_fighter.other_fighter = player_one_fighter
 	
-func change_map():
-
-	get_tree().change_scene_to_file(map.resource_path)
+	await get_tree().process_frame
+	
+	player_one_fighter.position = Vector2(70, 150)
+	player_two_fighter.position = Vector2(250, 150)
 	

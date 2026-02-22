@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://br7uups7ou8m" path="res://Assets/Characters/Baki/BakiMugShot.png" id="4_r1xmk"]
 [ext_resource type="PackedScene" uid="uid://cfh10tllkcijw" path="res://Scenes/Fighters/baki.tscn" id="5_o1e5v"]
 
-[node name="CharacterPicker" type="Control" node_paths=PackedStringArray("first_button")]
+[node name="CharacterPicker" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n32q4")
-first_button = NodePath("Fighters/MugShots/BakiButton")
 
 [node name="Fighters" type="VBoxContainer" parent="."]
 layout_mode = 1
