@@ -4,7 +4,7 @@ class_name PlayerCrouchLightKickState
 func enter() -> void:
 	super()
 	player.velocity.x = 0.0
-	player.animation_player.play(crouch_strong_kick_anim)
+	player.animation_player.play(crouch_light_kick_anim)
 
 func process_physics(delta):
 	if finished:

@@ -23,6 +23,10 @@ func get_state(state_name: String) -> PlayerState:
 	return state_machine.states[state_name]
 
 func attack_inputs(event: InputEvent) -> State:
+	var combo_match := player.combo_buffer.check_all()
+	if not combo_match.is_empty():
+		return get_state(combo_match)
+	
 	if event.is_action_pressed("light_punch"): return get_state("LightPunch")
 	if event.is_action_pressed("strong_punch"): return get_state("StrongPunch")
 		

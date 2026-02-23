@@ -1,8 +1,9 @@
-[gd_scene load_steps=58 format=3 uid="uid://cfh10tllkcijw"]
+[gd_scene load_steps=64 format=3 uid="uid://cfh10tllkcijw"]
 
 [ext_resource type="Script" uid="uid://bjejuoreank15" path="res://Scripts/fighter.gd" id="1_4ssuy"]
 [ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Characters/Baki/Baki.png" id="2_64efi"]
 [ext_resource type="Script" uid="uid://lubqi53sqw2g" path="res://Scripts/StateMachine/state_machine.gd" id="3_qr76p"]
+[ext_resource type="Texture2D" uid="uid://b3rnuiqcbkgxv" path="res://Assets/Characters/Baki/MachPunchSegment.png" id="3_uluw4"]
 [ext_resource type="Script" uid="uid://dp1k5h8ndjx2" path="res://Scripts/StateMachine/PlayerStates/idle.gd" id="4_md325"]
 [ext_resource type="Script" uid="uid://cwoaj8wg5weo5" path="res://Scripts/StateMachine/PlayerStates/crouch.gd" id="5_c4spl"]
 [ext_resource type="Script" uid="uid://bctm1pl2l3w2o" path="res://Scripts/StateMachine/PlayerStates/walk.gd" id="5_f5a55"]
@@ -25,9 +26,12 @@
 [ext_resource type="PackedScene" uid="uid://bq1j8ndul5exb" path="res://Scenes/health_bar.tscn" id="22_rdo4m"]
 [ext_resource type="Script" uid="uid://dbnpqtryemt8l" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_strong_kick.gd" id="23_f8p6c"]
 [ext_resource type="PackedScene" uid="uid://c8wi02732rj0n" path="res://Scenes/stamina_bar.tscn" id="23_yqkxa"]
+[ext_resource type="Script" uid="uid://dnfxdht3a4nic" path="res://Scripts/StateMachine/PlayerStates/AttackStates/special_one.gd" id="24_ibigg"]
 [ext_resource type="PackedScene" uid="uid://dghb6f0fo7wvs" path="res://Scenes/hit_particle.tscn" id="25_00xcb"]
+[ext_resource type="Script" uid="uid://4767rn5xvgqc" path="res://Scripts/StateMachine/PlayerStates/AttackStates/special_two.gd" id="26_315tt"]
 [ext_resource type="Texture2D" uid="uid://clb8pr4e8ql6r" path="res://Assets/Characters/Baki/BakiMugShotStates.png" id="26_a5r0i"]
 [ext_resource type="Script" uid="uid://bu8rscsfoicdy" path="res://Scripts/hit_particle.gd" id="26_ucxwr"]
+[ext_resource type="Script" uid="uid://bwbmyb7y3qd3d" path="res://Scripts/combo_buffer.gd" id="29_hgvti"]
 
 [sub_resource type="Animation" id="Animation_qr76p"]
 length = 0.001
@@ -126,6 +130,42 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AttackPivot/MachPunchSprite:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AttackPivot/MachPunchSprite:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AttackPivot/MachPunchSprite:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(44, -14)]
 }
 
 [sub_resource type="Animation" id="Animation_c4spl"]
@@ -1170,6 +1210,194 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 3, 2, 1]
 }
 
+[sub_resource type="Animation" id="Animation_hgvti"]
+resource_name = "double_gut_punch"
+length = 0.40000334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [35, 39, 35]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.9058258817850566]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtboxArea/HurtboxCollisionShape:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtboxArea/HurtboxCollisionShape:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [54.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hitbox:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_ibigg"]
+resource_name = "mach_punch"
+length = 0.60000336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [8, 40, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackPivot/AttackBox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, -14), Vector2(155, -14)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackPivot/AttackBox:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5707964]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackPivot/MachPunchSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackPivot/MachPunchSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(15, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AttackPivot/MachPunchSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(44, -14), Vector2(155, -14)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:height")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.06666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [44.0, 240.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_md325"]
 _data = {
 &"RESET": SubResource("Animation_qr76p"),
@@ -1180,6 +1408,7 @@ _data = {
 &"crouch_parry": SubResource("Animation_jtjki"),
 &"crouch_strong_kick": SubResource("Animation_njn8b"),
 &"crouch_strong_punch": SubResource("Animation_jqp1r"),
+&"double_gut_punch": SubResource("Animation_hgvti"),
 &"fall": SubResource("Animation_3bun3"),
 &"forward_light_punch": SubResource("Animation_ergsl"),
 &"high_kick": SubResource("Animation_tg356"),
@@ -1190,6 +1419,7 @@ _data = {
 &"kick": SubResource("Animation_houyy"),
 &"landing": SubResource("Animation_3cnae"),
 &"light_punch": SubResource("Animation_t8bph"),
+&"mach_punch": SubResource("Animation_ibigg"),
 &"parry": SubResource("Animation_0oouj"),
 &"strong_punch": SubResource("Animation_64vuf"),
 &"walk": SubResource("Animation_r6o28")
@@ -1249,6 +1479,11 @@ shape = SubResource("CapsuleShape2D_houyy")
 disabled = true
 debug_color = Color(0.99406785, 0, 0.23507595, 0.41960785)
 
+[node name="MachPunchSprite" type="Sprite2D" parent="AttackPivot"]
+visible = false
+position = Vector2(44, -14)
+texture = ExtResource("3_uluw4")
+
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5ipve")
 debug_color = Color(0.9923554, 0, 0.25952098, 0.41960785)
@@ -1302,7 +1537,7 @@ metadata/_custom_type_script = "uid://bc8ujupfwfr65"
 
 [node name="Hurt" type="Node2D" parent="StateMachine"]
 script = ExtResource("12_5ipve")
-invincibility_duration = 0.1
+invincibility_duration = 0.2
 
 [node name="CrouchHurt" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_64efi")
@@ -1323,7 +1558,7 @@ metadata/_custom_type_script = "uid://nktho56wdch5"
 
 [node name="ForwardLightPunch" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("17_ergsl")
-up_strenth = 70
+up_strength = 1
 metadata/_custom_type_script = "uid://b3aie60v8ljpr"
 
 [node name="JumpPunch" type="Node2D" parent="StateMachine/AttackStates"]
@@ -1354,14 +1589,35 @@ metadata/_custom_type_script = "uid://buegw5vyhjll8"
 
 [node name="CrouchLightKick" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("18_njn8b")
+up_strength = 1
 hit_type = 1
 metadata/_custom_type_script = "uid://oplxlq57q0ni"
 
 [node name="CrouchStrongKick" type="Node2D" parent="StateMachine/AttackStates"]
 script = ExtResource("23_f8p6c")
 hit_strength = 1
+up_strength = 1
 hit_type = 1
 metadata/_custom_type_script = "uid://dbnpqtryemt8l"
+
+[node name="Specials" type="Node2D" parent="StateMachine/AttackStates"]
+
+[node name="DoubleGutPunch" type="Node2D" parent="StateMachine/AttackStates/Specials"]
+script = ExtResource("24_ibigg")
+hit_strength = 2
+up_strength = 3
+hit_type = 1
+sequence = Array[String](["crouch", "light_punch", "strong_punch"])
+metadata/_custom_type_script = "uid://dnfxdht3a4nic"
+
+[node name="MachPunch" type="Node2D" parent="StateMachine/AttackStates/Specials"]
+script = ExtResource("26_315tt")
+hit_strength = 1
+up_strength = null
+hit_type = null
+knock_down = null
+sequence = Array[String](["left", "right", "light_punch"])
+metadata/_custom_type_script = "uid://4767rn5xvgqc"
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 visible = false
@@ -1401,3 +1657,7 @@ z_index = 20
 trail_sections = 2
 trail_section_subdivisions = 1
 script = ExtResource("26_ucxwr")
+
+[node name="ComboBuffer" type="Node" parent="."]
+script = ExtResource("29_hgvti")
+metadata/_custom_type_script = "uid://bwbmyb7y3qd3d"

@@ -12,10 +12,16 @@ class_name PlayerHurtState
 @export var medium_knockback: float = 120.0
 @export var heavy_knockback: float = 200.0
 
+@export var light_up: float = 50.0
+@export var medium_up: float = 100.0
+@export var heavy_up: float = 180.0
+
 @export var invincibility_duration: float = 0.6
 
 var hurt_timer: float = 0.0
 var knockback_velocity: Vector2 = Vector2.ZERO
+var knockback_up: float = 50.0
+var knockback_x_amount: float = 0.0
 var is_invincible: bool = false
 var attacker_position: Vector2 = Vector2.ZERO
 
@@ -26,14 +32,10 @@ func enter() -> void:
 	hurt_timer = medium_hitstun
 	is_invincible = true
 	
-	# Cancel any current velocity
 	player.velocity = Vector2.ZERO
-	player.animation_player.play(hurt_animation)
+	player.animation_player.call_deferred("play", hurt_animation)
 	
-	# Apply knockback
 	apply_knockback()
-	
-	# Start invincibility frames
 	start_invincibility()
 	
 func exit() -> void:
@@ -47,81 +49,76 @@ func get_next_state() -> State:
 		return get_state("Fall")
 
 func process_physics(delta: float) -> State:
-	# Count down hitstun
 	hurt_timer -= delta
 	
-	# Apply knockback with smooth decay
 	player.velocity.x = lerp(player.velocity.x, 0.0, 5.0 * delta)
 	
-	# Apply gravity if in air
 	if not player.is_on_floor():
 		player.velocity.y += gravity * delta
-	else:
-		# On ground, reduce vertical velocity
+	elif hurt_timer <= 0:
 		player.velocity.y = 0
 	
 	player.move_and_slide()
 	
-	# Check if hitstun is over
 	if hurt_timer <= 0:
 		return get_next_state()
 	
 	return null
 
-## Apply knockback based on attacker position
 func apply_knockback() -> void:
-	# Determine knockback direction
 	if (state_machine.previous_state == get_state("Parry") or 
 	state_machine.previous_state == get_state("CrouchParry")):
 		player.velocity = calculate_knockback() / 5
 	else:
 		player.velocity = calculate_knockback()
-
+		print(calculate_knockback())
+		
 func calculate_knockback() -> Vector2:
-	
 	var knockback_dir: float
 	
 	if attacker_position != Vector2.ZERO:
-		# Knock away from attacker
 		knockback_dir = sign(player.global_position.x - attacker_position.x)
 	else:
-		# Default to opposite of facing direction
 		knockback_dir = -1
 	
-	# Apply knockback
-	var knockback_x = knockback_dir * medium_knockback
-	var knockback_y = -50.0  # Small upward component
-	
-	return Vector2(knockback_x, knockback_y)
-	
-## Set knockback strength based on attack type
-func set_knockback_strength(strength: HitEffects.HitStrength) -> void:
-	var kb_amount: float
-	
+	return Vector2(knockback_dir * knockback_x_amount, -knockback_up)
+
+## Maps a HitStrength enum value to its knockback X amount
+func strength_to_knockback(strength: HitEffects.HitStrength) -> float:
 	match strength:
+		HitEffects.HitStrength.LIGHT: return light_knockback
+		HitEffects.HitStrength.MEDIUM: return medium_knockback
+		HitEffects.HitStrength.HEAVY, HitEffects.HitStrength.SUPER: return heavy_knockback
+	return medium_knockback
+
+## Maps a HitStrength enum value to its knockback Y (up) amount	
+func strength_to_up(strength: HitEffects.HitStrength) -> float:
+	match strength:
+		HitEffects.HitStrength.LIGHT: return light_up
+		HitEffects.HitStrength.MEDIUM: return medium_up
+		HitEffects.HitStrength.HEAVY, HitEffects.HitStrength.SUPER: return heavy_up
+	return medium_up
+
+## Set knockback and hitstun based on hit_strength (x) and up_strength (y)
+func set_knockback_strength(hit: HitEffects.HitStrength, up: HitEffects.HitStrength) -> void:
+	match hit:
 		HitEffects.HitStrength.LIGHT:
 			hurt_timer = light_hitstun
-			kb_amount = light_knockback
 		HitEffects.HitStrength.MEDIUM:
 			hurt_timer = medium_hitstun
-			kb_amount = medium_knockback
 		HitEffects.HitStrength.HEAVY, HitEffects.HitStrength.SUPER:
 			hurt_timer = heavy_hitstun
-			kb_amount = heavy_knockback
 		_:
-			kb_amount = medium_knockback
+			hurt_timer = medium_hitstun
 	
-	# Update knockback velocity with new strength
-	if player.velocity.x != 0:
-		var dir = sign(player.velocity.x)
-		player.velocity.x = dir * kb_amount
+	knockback_x_amount = strength_to_knockback(hit)
+	knockback_up = strength_to_up(up)
 
 ## Start invincibility frames with visual feedback
 func start_invincibility() -> void:
 	is_invincible = true
 	player.set_invincible(true)
 	
-	# Create flashing effect
 	var sprite = player.sprite_2d
 	var tween = create_tween()
 	var flash_count = int(invincibility_duration / 0.1)
@@ -129,7 +126,6 @@ func start_invincibility() -> void:
 	tween.tween_property(sprite, "modulate:a", 0.3, 0.05)
 	tween.tween_property(sprite, "modulate:a", 1.0, 0.05)
 	
-	# End invincibility after duration
 	get_tree().create_timer(invincibility_duration, false).timeout.connect(_end_invincibility)
 
 func _end_invincibility() -> void:

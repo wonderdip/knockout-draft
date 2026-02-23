@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cya86t2w3h08c"]
+
+[ext_resource type="Texture2D" uid="uid://b3rnuiqcbkgxv" path="res://Assets/Characters/Baki/MachPunchSegment.png" id="1_abi37"]
+
+[node name="MachPunch" type="Node2D"]
+
+[node name="MachPunchSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_abi37")

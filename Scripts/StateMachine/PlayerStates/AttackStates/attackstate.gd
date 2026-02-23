@@ -8,12 +8,16 @@ var jump_punch_anim: String = "jump_punch"
 var kick_anim: String = "kick"
 var high_kick_anim: String = "high_kick"
 
+var special_one_anim: String = "double_gut_punch"
+var special_two_anim: String = "mach_punch"
+
 @export var hit_strength: HitEffects.HitStrength = HitEffects.HitStrength.LIGHT
-@export var up_strenth: int = 50
+@export var up_strength: HitEffects.HitStrength = HitEffects.HitStrength.LIGHT
 @export var hit_type: HitType
 @export var knock_down: bool
+@export var sequence: Array[String]
 
-enum HitType {HIGH, LOW}
+enum HitType {HIGH, LOW, GRAB}
 
 var finished: bool = false
 var air_speed: float = 75.0
