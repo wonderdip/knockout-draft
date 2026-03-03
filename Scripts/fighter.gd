@@ -130,22 +130,8 @@ func take_damage(attacker: Fighter,
 
 	if is_invincible:
 		return
-
-	var is_parrying := (state_machine.current_state is PlayerParryState or
-		state_machine.current_state is PlayerCrouchParryState)
-
-	if is_parrying:
-		stamina = clampf(stamina + 10, 0, max_stamina)
-	else:
-		current_health -= get_attack_damage(hit_strength)
-	current_health = max(0, current_health)
-	health_changed.emit(current_health, max_health)
-
-	if current_health <= 0:
-		die()
-		return
-
-	# Handle parry knockback
+	
+		# Handle parry knockback
 	if state_machine.current_state is PlayerCrouchParryState and hit_type == PlayerAttackState.HitType.LOW:
 		attacker.apply_knockback(self, hit_strength)
 		parry_particle.global_position = hit_position
@@ -155,6 +141,14 @@ func take_damage(attacker: Fighter,
 		attacker.apply_knockback(self, hit_strength)
 		parry_particle.global_position = hit_position
 		parry_particle.restart()
+		return
+
+	current_health -= get_attack_damage(hit_strength)
+	current_health = max(0, current_health)
+	health_changed.emit(current_health, max_health)
+
+	if current_health <= 0:
+		die()
 		return
 
 	var hurt_state_name := "CrouchHurt" if (state_machine.current_state is PlayerCrouchState or input_crouch) else "Hurt"
