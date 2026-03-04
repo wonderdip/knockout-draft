@@ -32,8 +32,6 @@ func _process(delta: float) -> void:
 func _update_camera(delta: float) -> void:
 	if fighters.is_empty():
 		fighters = Global.get_fighters()  # assign directly, not append
-		for fighter in fighters:
-			fighter.died.connect(_on_player_died)
 	
 	# Filter out dead/freed fighters before using them
 	fighters = fighters.filter(func(f): return is_instance_valid(f))
@@ -65,9 +63,6 @@ func _push_players_with_camera() -> void:
 			cam_right - inset
 		)
 
-func _on_player_died():
-	fight_over = true
-		
 func cam_shake(Max: float, Min: float, Length: float):
 	var camera_tween = get_tree().create_tween()
 	camera_tween.tween_method(StartCameraShake, Max, Min, Length)

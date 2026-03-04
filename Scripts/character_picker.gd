@@ -179,4 +179,4 @@ func _on_character_chosen(player_id: int, fighter: Fighter):
 	
 func _on_start_pressed() -> void:
 	if can_start:
-		Global.start_game()
+		SceneManager.change_scene(SceneManager.scenes.get("BuildingTop"))

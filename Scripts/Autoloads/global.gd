@@ -1,9 +1,11 @@
 extends Node
 
-@export var map: PackedScene = preload("res://Scenes/Maps/training_floor.tscn")
-
 var player_one_fighter: Fighter = null
 var player_two_fighter: Fighter = null
+var p1_victories: int
+var p2_victories: int
+
+var rounds: int = 0
 var game_started: bool = false
 
 func character_chosen(player_id: int, fighter: Fighter):
@@ -16,6 +18,13 @@ func character_chosen(player_id: int, fighter: Fighter):
 		player_two_fighter.player_number = player_id
 		player_two_fighter.device_id = 1
 
+func get_fighter(player_number: int) -> Fighter:
+	if player_number == 1:
+		return player_one_fighter
+	elif player_number == 2:
+		return player_two_fighter
+	return null
+	
 func get_fighters() -> Array[Fighter]:
 	var result: Array[Fighter] = []
 	
@@ -39,16 +48,38 @@ func _process(delta: float) -> void:
 	pass
 	
 func start_game():
-	game_started = true
-	await get_tree().change_scene_to_packed(map)
-	add_players()
+	if game_started:
+		return
+	else:
+		game_started = true
+		add_players()
 
+func _on_round_over(player_number: int):
+	match player_number:
+		1:
+			p1_victories += 1
+		2:
+			p2_victories += 1
+	SceneManager.change_scene(SceneManager.scenes.get("UpgradePicker"))
+	
+func refresh_players():
+	rounds += 1
+	for player in get_fighters():
+		player.stamina = player.max_stamina
+		player.heal(player.max_health)
+		player.mug_shot.frame = 0
+		player.animation_player.play("RESET")
+	player_one_fighter.position = Vector2(70, 150)
+	player_two_fighter.position = Vector2(250, 150)
+	
 func add_players():
 	add_child(player_one_fighter, true)
 	add_child(player_two_fighter, true)
 	
 	player_one_fighter.other_fighter = player_two_fighter
 	player_two_fighter.other_fighter = player_one_fighter
+	player_one_fighter.died.connect(_on_round_over)
+	player_two_fighter.died.connect(_on_round_over)
 	
 	await get_tree().process_frame
 	

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 HitEffects="*res://Scripts/Autoloads/hit_effects.gd"
 Global="*res://Scenes/Autoloads/global.tscn"
+SceneManager="*res://Scenes/Autoloads/scene_manager.tscn"
 
 [display]
 
@@ -129,5 +130,3 @@ ui_escape={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

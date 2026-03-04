@@ -34,14 +34,12 @@ func flash_gradient():
 	
 	var grad_texture = texture_progress as GradientTexture2D
 	var gradient = grad_texture.gradient
-	
-	for i in 6:
-		gradient.set_color(0, Color.WHITE)
-		gradient.set_color(1, Color.WHITE)
-		await get_tree().create_timer(0.4).timeout
+	gradient.set_color(0, Color.WHITE)
+	gradient.set_color(1, Color.WHITE)
+	await get_tree().create_timer(0.4).timeout
 		
-		update_gradient_colors(value / max_value)
-		await get_tree().create_timer(0.4).timeout
+	update_gradient_colors(value / max_value)
+	await get_tree().create_timer(0.4).timeout
 	
 	is_flashing = false	
 

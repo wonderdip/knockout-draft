@@ -1,12 +1,14 @@
-[gd_scene load_steps=64 format=3 uid="uid://cfh10tllkcijw"]
+[gd_scene load_steps=68 format=3 uid="uid://cfh10tllkcijw"]
 
 [ext_resource type="Script" uid="uid://bjejuoreank15" path="res://Scripts/fighter.gd" id="1_4ssuy"]
 [ext_resource type="Texture2D" uid="uid://dqhm85mdvd5xw" path="res://Assets/Characters/Baki/Baki.png" id="2_64efi"]
 [ext_resource type="Script" uid="uid://lubqi53sqw2g" path="res://Scripts/StateMachine/state_machine.gd" id="3_qr76p"]
 [ext_resource type="Texture2D" uid="uid://b3rnuiqcbkgxv" path="res://Assets/Characters/Baki/MachPunchSegment.png" id="3_uluw4"]
+[ext_resource type="Texture2D" uid="uid://btg30nxkt5ski" path="res://Assets/Characters/Baki/MachPunchOrigin.png" id="4_helxl"]
 [ext_resource type="Script" uid="uid://dp1k5h8ndjx2" path="res://Scripts/StateMachine/PlayerStates/idle.gd" id="4_md325"]
 [ext_resource type="Script" uid="uid://cwoaj8wg5weo5" path="res://Scripts/StateMachine/PlayerStates/crouch.gd" id="5_c4spl"]
 [ext_resource type="Script" uid="uid://bctm1pl2l3w2o" path="res://Scripts/StateMachine/PlayerStates/walk.gd" id="5_f5a55"]
+[ext_resource type="Texture2D" uid="uid://iijvig2536im" path="res://Assets/Characters/Baki/MachPunchEnd.png" id="5_glo5v"]
 [ext_resource type="Script" uid="uid://dfs7p5vm1nnjt" path="res://Scripts/StateMachine/PlayerStates/AttackStates/light_punch.gd" id="6_t8bph"]
 [ext_resource type="Script" uid="uid://bsms6xbq0vmwv" path="res://Scripts/StateMachine/PlayerStates/parry.gd" id="7_jtjki"]
 [ext_resource type="Script" uid="uid://c2jcmd2f3ehdi" path="res://Scripts/StateMachine/PlayerStates/jump.gd" id="7_meeca"]
@@ -20,9 +22,10 @@
 [ext_resource type="Script" uid="uid://buegw5vyhjll8" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_strong_punch.gd" id="13_jqp1r"]
 [ext_resource type="Script" uid="uid://b0rt5h2r8ndid" path="res://Scripts/StateMachine/PlayerStates/AttackStates/jump_punch.gd" id="14_5ae6y"]
 [ext_resource type="Script" uid="uid://b3aie60v8ljpr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/forward_light_punch.gd" id="17_ergsl"]
+[ext_resource type="Script" uid="uid://drbf5ekeay53s" path="res://Scripts/StateMachine/PlayerStates/victory.gd" id="17_mh5bi"]
 [ext_resource type="Script" uid="uid://oplxlq57q0ni" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_light_kick.gd" id="18_njn8b"]
 [ext_resource type="Script" uid="uid://58j3egyvj5pb" path="res://Scripts/StateMachine/PlayerStates/AttackStates/high_kick.gd" id="18_tg356"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
+[ext_resource type="Script" uid="uid://boqjeoefqersr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
 [ext_resource type="PackedScene" uid="uid://bq1j8ndul5exb" path="res://Scenes/health_bar.tscn" id="22_rdo4m"]
 [ext_resource type="Script" uid="uid://dbnpqtryemt8l" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_strong_kick.gd" id="23_f8p6c"]
 [ext_resource type="PackedScene" uid="uid://c8wi02732rj0n" path="res://Scenes/stamina_bar.tscn" id="23_yqkxa"]
@@ -134,7 +137,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("AttackPivot/MachPunchSprite:visible")
+tracks/8/path = NodePath("AttackPivot/MachPunch/MachPunchRay:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -146,38 +149,74 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("AttackPivot/MachPunchSprite:scale")
+tracks/9/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:radius")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [10.0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("AttackPivot/MachPunchSprite:position")
+tracks/10/path = NodePath("AttackPivot/MachPunch/MachPunchRay:size")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(44, -14)]
+"values": [Vector2(16, 16)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:radius")
+tracks/11/path = NodePath("AttackPivot/MachPunch/MachPunchOrigin:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("AttackPivot/MachPunch/MachPunchEnd:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("AttackPivot/MachPunch/MachPunchEnd:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [10.0]
+"values": [Vector2(188, -14)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sprite2D:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_c4spl"]
@@ -1227,7 +1266,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_ibigg"]
 resource_name = "mach_punch"
-length = 0.60000336
+length = 0.93333673
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1235,7 +1274,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.5),
+"times": PackedFloat32Array(0, 0.06666667, 0.8666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [8, 40, 8]
@@ -1247,10 +1286,10 @@ tracks/1/path = NodePath("AttackPivot/AttackBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.06666667, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.06666667, 0.46666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(16, -14), Vector2(155, -14)]
+"values": [Vector2(31, -14), Vector2(116, -14), Vector2(31, -14)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1271,19 +1310,19 @@ tracks/3/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:disabled
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.46666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [true, false, true, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackPivot/MachPunchSprite:visible")
+tracks/4/path = NodePath("AttackPivot/MachPunch/MachPunchRay:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.5),
+"times": PackedFloat32Array(0, 0.06666667, 0.8666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1291,50 +1330,74 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AttackPivot/MachPunchSprite:scale")
+tracks/5/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:height")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.06666667, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.06666667, 0.46666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(15, 1)]
+"values": [44.0, 160.0, 44.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("AttackPivot/MachPunchSprite:position")
+tracks/6/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:radius")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.06666667, 0.5),
+"times": PackedFloat32Array(0.06666667, 0.8666667),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(44, -14), Vector2(155, -14)]
+"update": 1,
+"values": [6.0, 10.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:height")
+tracks/7/path = NodePath("AttackPivot/MachPunch/MachPunchRay:size")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.06666667, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.06666667, 0.46666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [44.0, 240.0]
+"values": [Vector2(16, 16), Vector2(144, 16), Vector2(16, 16)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("AttackPivot/AttackBox/AttackBoxCollisionShape:shape:radius")
+tracks/8/path = NodePath("AttackPivot/MachPunch/MachPunchOrigin:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.06666667, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [6.0, 10.0]
+"values": [false, true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AttackPivot/MachPunch/MachPunchEnd:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AttackPivot/MachPunch/MachPunchEnd:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(32, -14), Vector2(188, -14), Vector2(48, -14)]
 }
 
 [sub_resource type="Animation" id="Animation_0oouj"]
@@ -1422,6 +1485,34 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 3, 2, 1]
 }
 
+[sub_resource type="Animation" id="Animation_glo5v"]
+resource_name = "victory"
+length = 2.0000033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.53333336, 0.93333334, 1.4666667, 1.6, 1.7333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [41, 42, 43, 44, 43, 42, 41]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(1, 1), Vector2(1.02, 1.02), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_md325"]
 _data = {
 &"RESET": SubResource("Animation_qr76p"),
@@ -1446,6 +1537,7 @@ _data = {
 &"mach_punch": SubResource("Animation_ibigg"),
 &"parry": SubResource("Animation_0oouj"),
 &"strong_punch": SubResource("Animation_64vuf"),
+&"victory": SubResource("Animation_glo5v"),
 &"walk": SubResource("Animation_r6o28")
 }
 
@@ -1491,7 +1583,7 @@ libraries = {
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_64efi")
 hframes = 5
-vframes = 9
+vframes = 10
 
 [node name="AttackPivot" type="Node2D" parent="."]
 
@@ -1504,10 +1596,26 @@ shape = SubResource("CapsuleShape2D_houyy")
 disabled = true
 debug_color = Color(0.99406785, 0, 0.23507595, 0.41960785)
 
-[node name="MachPunchSprite" type="Sprite2D" parent="AttackPivot"]
+[node name="MachPunch" type="Node2D" parent="AttackPivot"]
+
+[node name="MachPunchRay" type="TextureRect" parent="AttackPivot/MachPunch"]
 visible = false
-position = Vector2(44, -14)
+offset_left = 36.0
+offset_top = -22.0
+offset_right = 52.0
+offset_bottom = -6.0
 texture = ExtResource("3_uluw4")
+stretch_mode = 1
+
+[node name="MachPunchOrigin" type="Sprite2D" parent="AttackPivot/MachPunch"]
+visible = false
+position = Vector2(30, -14)
+texture = ExtResource("4_helxl")
+
+[node name="MachPunchEnd" type="Sprite2D" parent="AttackPivot/MachPunch"]
+visible = false
+position = Vector2(188, -14)
+texture = ExtResource("5_glo5v")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5ipve")
@@ -1569,6 +1677,10 @@ script = ExtResource("13_64efi")
 light_knockback = 40.0
 medium_knockback = 60.0
 heavy_knockback = 100.0
+
+[node name="Victory" type="Node2D" parent="StateMachine"]
+script = ExtResource("17_mh5bi")
+metadata/_custom_type_script = "uid://drbf5ekeay53s"
 
 [node name="AttackStates" type="Node2D" parent="StateMachine"]
 

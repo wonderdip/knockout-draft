@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Fighter
 
 signal health_changed(new_health: float, max_health: float)
-signal died
+signal died(player_number: int)
 
 @export var fighter_name: String = ""
 @export var state_machine: StateMachine
@@ -171,8 +171,7 @@ func apply_knockback(from: Fighter, hit_strength: HitEffects.HitStrength) -> voi
 
 func die() -> void:
 	print(fighter_name + " " + str(player_number) + " has been defeated!")
-	died.emit()
-	queue_free()
+	other_fighter.state_machine.change_state(other_fighter.state_machine.states.get("Victory"))
 
 func set_invincible(invincible: bool) -> void:
 	is_invincible = invincible
@@ -195,7 +194,7 @@ func change_direction(dir: float) -> void:
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	stamina = min(max_stamina, stamina + stamina_gain * delta)
-
+		
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 

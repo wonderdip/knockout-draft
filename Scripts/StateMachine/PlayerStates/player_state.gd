@@ -10,6 +10,7 @@ var jump_anim: String = "jump"
 var fall_anim: String = "fall"
 var crouch_anim: String = "crouch"
 var parry_anim: String = "parry"
+var victory_anim: String = "victory"
 var crouch_parry_anim: String = "crouch_parry"
 
 #Input Keys
@@ -38,7 +39,6 @@ func attack_inputs(event: InputEvent) -> State:
 	
 func process_physics(delta: float) -> State:
 	player.velocity.y += gravity * delta
-		
 	player.move_and_slide()
 		
 	return null
