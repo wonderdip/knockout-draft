@@ -1,13 +1,18 @@
 extends Control
 
 var buttons: Array[UpgradeButton]
+var upgrades: Array[UpgradeData]
+@export_dir var upgrade_dir: String
+
 var player_devices := {}
 var current_index := 0
 
-var player_number: int = 2 
+var player_number: int 
 
 @onready var outline: Sprite2D = $Outline
 @onready var confirm_button: Button = $ConfirmButton
+@onready var upgrade_description: Label = $UpgradeDescription
+@onready var upgrade_name: Label = $UpgradeName
 
 var chosen_button: UpgradeButton = null
 
@@ -20,20 +25,24 @@ var analog_deadzone := 0.5
 var can_start: bool = false
 
 func _ready() -> void:
+	player_number = Global.round_loser
 	match player_number:
 		1:
 			outline.modulate = Color.BLUE
 		2:
 			outline.modulate = Color.RED
 	
-	assign_devices()
-	
 	if buttons.is_empty():
 		collect_buttons(self)
+	if upgrades.is_empty():
+		collect_upgrades()
+	roll_upgrades()
 		
+	@warning_ignore("integer_division")
 	current_index = int((buttons.size() - 1) / 2)
+	Input.joy_connection_changed.connect(assign_devices)
 	
-func assign_devices():
+func assign_devices(device: int, connected: bool):
 	var pads = Input.get_connected_joypads()
 	
 	if pads.size() >= 1:
@@ -65,9 +74,11 @@ func _unhandled_input(event):
 			return
 			
 		if event.is_action_pressed("select"):
+			if chosen_button == buttons[current_index]:
+				return
+				
 			if chosen_button:
 				chosen_button.unchoose()
-
 			chosen_button = buttons[current_index]
 			chosen_button.choose()
 			update_confirm_state()
@@ -115,6 +126,7 @@ func _handle_analog(delta: float):
 		
 func _move_player(dir: int):
 	current_index = clamp(current_index + dir, 0, buttons.size() - 1)
+	
 	update_outlines()
 	
 func update_confirm_state():
@@ -125,23 +137,58 @@ func update_confirm_state():
 		confirm_button.release_focus()
 		can_start = false
 		
-func _process(delta):
-	if Input.joy_connection_changed:
-		assign_devices()
-
-	_handle_analog(delta)
+func _process(_delta: float):
+	var current_upgrade = buttons[current_index].upgrade_data
+	if current_upgrade:
+		upgrade_description.text = "Description: " + current_upgrade.description
+		upgrade_name.text = current_upgrade.name
 
 func update_outlines():
 	if buttons.is_empty():
 		return
-	outline.global_position = buttons[current_index].global_position + Vector2(16, 16)
+	outline.global_position = buttons[current_index].global_position + Vector2(28, 36)
 
 func collect_buttons(node: Variant):
 	for button in node.get_children():
 		if button is UpgradeButton:
 			buttons.append(button)
 		collect_buttons(button)
+
+func collect_upgrades():
+	upgrades.clear()
 	
+	var dir: DirAccess = DirAccess.open(upgrade_dir)
+	dir.list_dir_begin()
+	var file_name: String = dir.get_next()
+	
+	while file_name != "":
+		if not dir.current_is_dir():
+			if file_name.get_extension() == "tres":
+				var path = upgrade_dir.path_join(file_name)
+				var resource = load(path)
+				if resource is UpgradeData:
+					upgrades.append(resource)
+		
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()
+	
+func roll_upgrades():
+	if upgrades.is_empty():
+		push_error("No upgrades loaded!")
+		return
+	
+	var pool = upgrades.duplicate()
+	
+	for button in buttons:
+		if pool.is_empty():
+			break
+		
+		var upgrade = pool.pick_random()
+		button.upgrade_data = upgrade
+		button.texture_normal = button.upgrade_data.texture
+		pool.erase(upgrade)
+		
 func _on_confirm_button_pressed() -> void:
 	if not chosen_button:
 		return

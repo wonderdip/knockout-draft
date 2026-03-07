@@ -4,6 +4,7 @@ var player_one_fighter: Fighter = null
 var player_two_fighter: Fighter = null
 var p1_victories: int
 var p2_victories: int
+var round_loser: int
 
 var rounds: int = 0
 var game_started: bool = false
@@ -45,7 +46,6 @@ func _process(delta: float) -> void:
 			else:
 				player_one_fighter.change_direction(1)
 				player_two_fighter.change_direction(-1)
-	pass
 	
 func start_game():
 	if game_started:
@@ -54,13 +54,27 @@ func start_game():
 		game_started = true
 		add_players()
 
+func upgrade_chosen(player_number: int, upgrade_data: UpgradeData):
+	match upgrade_data.type:
+		upgrade_data.UpgradeType.ATK_SPEED:
+			get_fighter(player_number).attack_speed = get_fighter(player_number).attack_speed * (1 + upgrade_data.value)
+		upgrade_data.UpgradeType.DMG:
+			get_fighter(player_number).damage_multiplier = get_fighter(player_number).damage_multiplier * (1 + upgrade_data.value)
+		upgrade_data.UpgradeType.KNOCKBACK:
+			get_fighter(player_number).knockback_multiplier = get_fighter(player_number).knockback_multiplier * (1 + upgrade_data.value)
+	refresh_players()
+	
 func _on_round_over(player_number: int):
 	match player_number:
-		1:
-			p1_victories += 1
 		2:
+			p1_victories += 1
+			round_loser = 2
+		1:
 			p2_victories += 1
+			round_loser = 1
+			
 	SceneManager.change_scene(SceneManager.scenes.get("UpgradePicker"))
+	print("Player One Victories: ", p1_victories, " Player Two Victories: ", p2_victories)
 	
 func refresh_players():
 	rounds += 1

@@ -12,8 +12,11 @@ signal died(player_number: int)
 @export var max_health: float = 100.0
 @export var damage_multiplier: float = 1.0
 @export var attack_speed: float = 1.0
+@export var horizontal_knockback_multiplier: float = 1.0
+@export var vertical_knockback_multiplier: float = 1.0
 @export var max_stamina: int = 100
 @export var stamina_gain: float = 10.0
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hurtbox_area: Area2D = $HurtboxArea
@@ -29,6 +32,8 @@ signal died(player_number: int)
 
 var player_number: int = 0
 var device_id: int = 0
+var upgrades: Array[UpgradeData]
+
 var other_fighter: Fighter
 
 var is_invincible: bool = false
@@ -116,10 +121,10 @@ func get_up_strength() -> HitEffects.HitStrength:
 
 func get_attack_damage(hit_strength: HitEffects.HitStrength) -> float:
 	match hit_strength:
-		HitEffects.HitStrength.LIGHT: return 5
-		HitEffects.HitStrength.MEDIUM: return 10
-		HitEffects.HitStrength.HEAVY: return 15
-		HitEffects.HitStrength.SUPER: return 25
+		HitEffects.HitStrength.LIGHT: return 5 * damage_multiplier
+		HitEffects.HitStrength.MEDIUM: return 10 * damage_multiplier
+		HitEffects.HitStrength.HEAVY: return 15 * damage_multiplier
+		HitEffects.HitStrength.SUPER: return 25 * damage_multiplier
 	return 0.0
 
 func take_damage(attacker: Fighter,

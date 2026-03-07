@@ -26,7 +26,6 @@ var can_start: bool = false
 func _ready() -> void:
 	p1_outline.modulate = Color.BLUE
 	p2_outline.modulate = Color.RED
-	assign_devices()
 	if buttons.is_empty():
 		collect_buttons(self)
 		
@@ -35,8 +34,9 @@ func _ready() -> void:
 	p2_index = min(1, buttons.size() - 1) # avoids out-of-bounds
 	p1_outline.global_position = buttons[p1_index].global_position + Vector2(19, 54)
 	p2_outline.global_position = buttons[p2_index].global_position + Vector2(57, 54)
-	
-func assign_devices():
+	Input.joy_connection_changed.connect(assign_devices)
+		
+func assign_devices(device: int, connected: bool):
 	var pads = Input.get_connected_joypads()
 	
 	if pads.size() >= 1:
@@ -149,9 +149,6 @@ func _move_player(player_id: int, dir: int):
 	update_outlines()
 
 func _process(delta):
-	if Input.joy_connection_changed and Input.get_connected_joypads().size() <= 2:
-		assign_devices()
-		
 	_handle_analog(p1_index, p1_axis_direction, p1_hold_timer, 1, delta)
 	_handle_analog(p2_index, p2_axis_direction, p2_hold_timer, 2, delta)
 

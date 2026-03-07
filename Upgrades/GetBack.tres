@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://drong3ti8g40q"]
+
+[ext_resource type="Script" uid="uid://cggfpdoju55mu" path="res://Scripts/upgrade.gd" id="1_nrx4y"]
+[ext_resource type="Texture2D" uid="uid://cdiqcj5v7tfgh" path="res://Assets/Upgrades/GetBack.png" id="2_nrx4y"]
+
+[resource]
+script = ExtResource("1_nrx4y")
+texture = ExtResource("2_nrx4y")
+name = "Get Back"
+description = "Increase Horizontal Knockback"
+type = 4
+rarity = 2
+value = 0.4
+metadata/_custom_type_script = "uid://cggfpdoju55mu"

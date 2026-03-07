@@ -1,17 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5u15fj6pm6ap"]
+[gd_scene load_steps=5 format=3 uid="uid://c5u15fj6pm6ap"]
 
-[ext_resource type="Texture2D" uid="uid://blksn7em3dtqe" path="res://Assets/Thumbnail.png" id="1_f6wmg"]
 [ext_resource type="Script" uid="uid://b3vwxc48kyajw" path="res://Scripts/upgrade_picker.gd" id="1_ow6i1"]
-[ext_resource type="Texture2D" uid="uid://bjd1cjqshnk82" path="res://Assets/UI/CharacterSelector.png" id="2_2e48a"]
+[ext_resource type="Texture2D" uid="uid://dgrogd20t31x8" path="res://Assets/Upgrades/CommonUpgradeCard.png" id="2_ixuur"]
 [ext_resource type="Script" uid="uid://dq27x6xs85hh4" path="res://Scripts/upgrade_button.gd" id="3_v5q4e"]
-[ext_resource type="Script" uid="uid://cggfpdoju55mu" path="res://Scripts/upgrade.gd" id="4_t3dbn"]
-
-[sub_resource type="Resource" id="Resource_8f18d"]
-script = ExtResource("4_t3dbn")
-name = "Big Punches"
-description = "Increases Attack Area of punches "
-type = 4
-metadata/_custom_type_script = "uid://cggfpdoju55mu"
+[ext_resource type="Texture2D" uid="uid://bd6o1x5a3v7rw" path="res://Assets/UI/UpgradeSelector.png" id="4_v5q4e"]
 
 [node name="UpgradePicker" type="Control"]
 layout_mode = 3
@@ -21,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ow6i1")
+upgrade_dir = "res://Upgrades"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -30,16 +23,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -120.0
-offset_top = -82.0
+offset_top = -100.0
 offset_right = 120.0
-offset_bottom = 82.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Upgrades" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Upgrades"
-horizontal_alignment = 1
 
 [node name="Cards" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -47,34 +35,58 @@ alignment = 1
 
 [node name="UpgradeOne" type="TextureButton" parent="VBoxContainer/Cards"]
 layout_mode = 2
-texture_normal = ExtResource("1_f6wmg")
+texture_normal = ExtResource("2_ixuur")
 script = ExtResource("3_v5q4e")
-upgrade_data = SubResource("Resource_8f18d")
 metadata/_custom_type_script = "uid://dq27x6xs85hh4"
 
 [node name="UpgradeTwo" type="TextureButton" parent="VBoxContainer/Cards"]
 layout_mode = 2
-texture_normal = ExtResource("1_f6wmg")
+texture_normal = ExtResource("2_ixuur")
 script = ExtResource("3_v5q4e")
 metadata/_custom_type_script = "uid://dq27x6xs85hh4"
 
 [node name="UpgradeThree" type="TextureButton" parent="VBoxContainer/Cards"]
 layout_mode = 2
-texture_normal = ExtResource("1_f6wmg")
+texture_normal = ExtResource("2_ixuur")
 script = ExtResource("3_v5q4e")
 metadata/_custom_type_script = "uid://dq27x6xs85hh4"
 
 [node name="Outline" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(160, 68)
-texture = ExtResource("2_2e48a")
+position = Vector2(160, 44)
+texture = ExtResource("4_v5q4e")
 
 [node name="ConfirmButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 124.0
-offset_top = 130.0
+offset_top = 178.0
 offset_right = 195.0
-offset_bottom = 161.0
+offset_bottom = 209.0
 text = "Confirm"
+
+[node name="UpgradeDescription" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 14.0
+offset_right = 144.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Description: "
+autowrap_mode = 2
+
+[node name="UpgradeName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 92.0
+offset_right = 256.0
+offset_bottom = 115.0
+text = "Upgrade Name"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]

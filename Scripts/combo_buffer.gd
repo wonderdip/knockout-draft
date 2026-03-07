@@ -14,7 +14,6 @@ func register(state_name: String, sequence: Array[String]) -> void:
 
 func add_input(action: String) -> void:
 	buffer.append({ "action": action, "time": Time.get_ticks_msec() / 1000.0 })
-	print(buffer)
 	
 func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec() / 1000.0
