@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MenuResource" load_steps=3 format=3 uid="uid://68a5ihuq0c4t"]
+
+[ext_resource type="Script" uid="uid://dolknqkbre8pq" path="res://Scripts/menu_resource.gd" id="1_b400e"]
+[ext_resource type="PackedScene" uid="uid://civ6yu7rec1ae" path="res://Menus/MenuScenes/map_picker.tscn" id="1_iaety"]
+
+[resource]
+script = ExtResource("1_b400e")
+menu_scene = ExtResource("1_iaety")
+name = "MapPicker"
+metadata/_custom_type_script = "uid://dolknqkbre8pq"

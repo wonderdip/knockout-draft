@@ -34,6 +34,19 @@ layout_mode = 2
 text = "Fighters"
 horizontal_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Fighters"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="P1Label" type="Label" parent="Fighters/HBoxContainer"]
+layout_mode = 2
+text = "Player One"
+
+[node name="P2Label" type="Label" parent="Fighters/HBoxContainer"]
+layout_mode = 2
+text = "Player Two"
+
 [node name="MugShots" type="HBoxContainer" parent="Fighters"]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -85,22 +98,27 @@ character = ExtResource("5_o1e5v")
 metadata/_custom_type_script = "uid://d28y6igxnfup8"
 
 [node name="Start" type="Button" parent="."]
-layout_mode = 0
-offset_left = 127.0
-offset_top = 124.0
-offset_right = 253.0
-offset_bottom = 155.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -64.0
+offset_right = 63.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Ready"
 
 [node name="P1Outline" type="Sprite2D" parent="."]
-visible = false
 z_index = 1
-position = Vector2(57, 54)
+position = Vector2(63, 104)
 texture = ExtResource("2_r1xmk")
 
 [node name="P2Outline" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(19, 54)
+position = Vector2(101, 104)
 texture = ExtResource("2_r1xmk")
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

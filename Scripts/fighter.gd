@@ -58,7 +58,6 @@ func _ready() -> void:
 	current_health = max_health
 
 	attack_box.area_entered.connect(_on_attack_hit)
-	hurtbox_area.area_shape_entered.connect(_on_hurtbox_hit)
 
 	health_changed.emit(current_health, max_health)
 	ui_layer.show()
@@ -95,29 +94,7 @@ func _on_attack_hit(area: Area2D) -> void:
 	var dir = sign(target.global_position.x - global_position.x)
 	var hit_position := attack_box.global_position + Vector2(half_size.x * dir, 0)
 
-	target.take_damage(self, attack_state.hit_strength, attack_state.up_strength, attack_state.hit_type, hit_position)
-
-func _on_hurtbox_hit(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
-	if is_invincible or state_machine.current_state is PlayerHurtState:
-		return
-
-	var attacker = area.get_parent()
-	if attacker == self or not attacker or not attacker.has_method("get_attack_damage"):
-		return
-
-	take_damage(attacker, attacker.get_hit_strength(), attacker.get_up_strength(), attacker.get_hit_type(), area.global_position)
-
-func get_hit_type() -> PlayerAttackState.HitType:
-	var attack_state := state_machine.current_state as PlayerAttackState
-	return attack_state.hit_type
-
-func get_hit_strength() -> HitEffects.HitStrength:
-	var attack_state := state_machine.current_state as PlayerAttackState
-	return attack_state.hit_strength
-
-func get_up_strength() -> HitEffects.HitStrength:
-	var attack_state := state_machine.current_state as PlayerAttackState
-	return attack_state.up_strength
+	target.take_damage(self, attack_state, hit_position)
 
 func get_attack_damage(hit_strength: HitEffects.HitStrength) -> float:
 	match hit_strength:
@@ -127,23 +104,25 @@ func get_attack_damage(hit_strength: HitEffects.HitStrength) -> float:
 		HitEffects.HitStrength.SUPER: return 25 * damage_multiplier
 	return 0.0
 
-func take_damage(attacker: Fighter,
-	hit_strength: HitEffects.HitStrength,
-	up_strength: HitEffects.HitStrength,
-	hit_type: PlayerAttackState.HitType,
+func take_damage(attacker: Fighter, 
+	attack_state: PlayerAttackState,
 	hit_position: Vector2 = global_position) -> void:
-
+	
+	var hit_type : PlayerAttackState.HitType = attack_state.hit_type
+	var hit_strength : HitEffects.HitStrength = attack_state.hit_strength
+	var up_strength : HitEffects.HitStrength = attack_state.up_strength
+	
 	if is_invincible:
 		return
 	
 		# Handle parry knockback
 	if state_machine.current_state is PlayerCrouchParryState and hit_type == PlayerAttackState.HitType.LOW:
-		attacker.apply_knockback(self, hit_strength)
+		attacker.parry_knockback(self, hit_strength)
 		parry_particle.global_position = hit_position
 		parry_particle.restart()
 		return
 	elif state_machine.current_state is PlayerParryState and hit_type == PlayerAttackState.HitType.HIGH:
-		attacker.apply_knockback(self, hit_strength)
+		attacker.parry_knockback(self, hit_strength)
 		parry_particle.global_position = hit_position
 		parry_particle.restart()
 		return
@@ -164,8 +143,8 @@ func take_damage(attacker: Fighter,
 		hurt_state.set_knockback_strength(hit_strength, up_strength)
 		state_machine.change_state(hurt_state)
 
-func apply_knockback(from: Fighter, hit_strength: HitEffects.HitStrength) -> void:
-	var knockback_dir : float = sign(global_position.x - from.global_position.x)
+func parry_knockback(parryer: Fighter, hit_strength: HitEffects.HitStrength) -> void:
+	var knockback_dir : float = sign(global_position.x - parryer.global_position.x)
 	var knockback_amount: float
 	match hit_strength:
 		HitEffects.HitStrength.LIGHT: knockback_amount = 30.0
@@ -176,6 +155,7 @@ func apply_knockback(from: Fighter, hit_strength: HitEffects.HitStrength) -> voi
 
 func die() -> void:
 	print(fighter_name + " " + str(player_number) + " has been defeated!")
+	state_machine.change_state(state_machine.states.get("Knocked"))
 	other_fighter.state_machine.change_state(other_fighter.state_machine.states.get("Victory"))
 
 func set_invincible(invincible: bool) -> void:

@@ -8,5 +8,5 @@ script = ExtResource("1_ouvsr")
 texture = ExtResource("2_ouvsr")
 name = "Big Punches"
 description = "Increases Attack Area of punches "
-type = 6
+type = 3
 metadata/_custom_type_script = "uid://cggfpdoju55mu"

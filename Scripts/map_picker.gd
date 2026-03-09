@@ -1,7 +1,7 @@
 extends Control
 
-var buttons: Array[UpgradeButton]
-var upgrades: Array[UpgradeData]
+var buttons: Array[MapButton]
+var maps: Array[MapResource]
 @export_dir var upgrade_dir: String
 
 var player_devices := {}
@@ -11,10 +11,9 @@ var player_number: int
 
 @onready var outline: Sprite2D = $Outline
 @onready var confirm_button: Button = $ConfirmButton
-@onready var upgrade_description: Label = $UpgradeDescription
-@onready var upgrade_name: Label = $UpgradeName
+@onready var map_name: Label = $MapName
 
-var chosen_button: UpgradeButton = null
+var chosen_button: MapButton = null
 
 var hold_timer := 0.0
 var axis_direction := 0
@@ -25,16 +24,13 @@ var analog_deadzone := 0.5
 var can_start: bool = false
 
 func _ready() -> void:
-	player_number = Global.round_loser
-	match player_number:
-		1: outline.modulate = Color.BLUE
-		2: outline.modulate = Color.RED
+	player_number = 1
+	outline.modulate = Color.BLUE
 	
 	if buttons.is_empty():
 		collect_buttons(self)
-	if upgrades.is_empty():
-		collect_upgrades()
-	roll_upgrades()
+	if maps.is_empty():
+		collect_maps()
 	
 	@warning_ignore("integer_division")
 	current_index = int((buttons.size() - 1) / 2)
@@ -143,24 +139,23 @@ func update_confirm_state():
 		
 func _process(delta: float):
 	_handle_analog(delta)
-	var current_upgrade = buttons[current_index].upgrade_data
-	if current_upgrade:
-		upgrade_description.text = "Description: " + current_upgrade.description
-		upgrade_name.text = current_upgrade.name
+	var current_map = buttons[current_index].map
+	if current_map:
+		map_name.text = current_map.name
 
 func update_outlines():
 	if buttons.is_empty():
 		return
-	outline.global_position = buttons[current_index].global_position + Vector2(28, 36)
+	outline.global_position = buttons[current_index].global_position + Vector2(48, 27)
 
 func collect_buttons(node: Variant):
 	for button in node.get_children():
-		if button is UpgradeButton:
+		if button is MapButton:
 			buttons.append(button)
 		collect_buttons(button)
 
-func collect_upgrades():
-	upgrades.clear()
+func collect_maps():
+	maps.clear()
 	
 	var dir: DirAccess = DirAccess.open(upgrade_dir)
 	dir.list_dir_begin()
@@ -171,32 +166,17 @@ func collect_upgrades():
 			if file_name.get_extension() == "tres":
 				var path = upgrade_dir.path_join(file_name)
 				var resource = load(path)
-				if resource is UpgradeData:
-					upgrades.append(resource)
+				if resource is MapResource:
+					maps.append(resource)
 		
 		file_name = dir.get_next()
 	
 	dir.list_dir_end()
 	
-func roll_upgrades():
-	if upgrades.is_empty():
-		push_error("No upgrades loaded!")
-		return
-	
-	var pool = upgrades.duplicate()
-	
-	for button in buttons:
-		if pool.is_empty():
-			break
-		
-		var upgrade = pool.pick_random()
-		button.upgrade_data = upgrade
-		button.texture_normal = button.upgrade_data.texture
-		pool.erase(upgrade)
-		
 func _on_confirm_button_pressed() -> void:
 	if not chosen_button:
 		return
 		
 	if can_start:
-		Global.upgrade_chosen(player_number, chosen_button.upgrade_data)
+		SceneManager.change_scene(SceneManager.get_menu("CharacterPicker"), false)
+		Global.current_map = chosen_button.map.name

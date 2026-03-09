@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://b75swe4505pre"]
+[gd_scene load_steps=13 format=3 uid="uid://b75swe4505pre"]
 
 [ext_resource type="Script" uid="uid://c1aeytphoal37" path="res://Scripts/Autoloads/scene_manager.gd" id="1_cdf2b"]
-[ext_resource type="PackedScene" uid="uid://cmrxtaee8x6ma" path="res://Scenes/Maps/training_floor.tscn" id="2_f1i8l"]
-[ext_resource type="PackedScene" uid="uid://imgwoactuoqv" path="res://Scenes/Maps/building_top.tscn" id="3_5xiqd"]
-[ext_resource type="PackedScene" uid="uid://c5u15fj6pm6ap" path="res://Scenes/upgrade_picker.tscn" id="4_bxo4p"]
+[ext_resource type="Script" uid="uid://dn478sj8nl1rx" path="res://Scripts/map_resource.gd" id="2_5xiqd"]
+[ext_resource type="Resource" uid="uid://bltliql5f41xw" path="res://Maps/building_top.tres" id="3_bxo4p"]
+[ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/training_floor.tres" id="4_2ilc3"]
+[ext_resource type="Script" uid="uid://dolknqkbre8pq" path="res://Scripts/menu_resource.gd" id="5_umgqe"]
+[ext_resource type="Resource" uid="uid://68a5ihuq0c4t" path="res://Menus/map_picker.tres" id="6_0gapa"]
+[ext_resource type="Resource" uid="uid://ccbr7umm0nsgp" path="res://Menus/upgrade_picker.tres" id="7_ribls"]
+[ext_resource type="Resource" uid="uid://cpl3qye68xydd" path="res://Menus/character_picker.tres" id="8_jatox"]
 
 [sub_resource type="Animation" id="Animation_5xiqd"]
 length = 0.001
@@ -61,11 +65,8 @@ _data = {
 
 [node name="SceneManager" type="CanvasLayer"]
 script = ExtResource("1_cdf2b")
-scenes = Dictionary[String, PackedScene]({
-"BuildingTop": ExtResource("3_5xiqd"),
-"TrainingFloor": ExtResource("2_f1i8l"),
-"UpgradePicker": ExtResource("4_bxo4p")
-})
+maps = Array[ExtResource("2_5xiqd")]([ExtResource("3_bxo4p"), ExtResource("4_2ilc3")])
+menus = Array[ExtResource("5_umgqe")]([ExtResource("6_0gapa"), ExtResource("7_ribls"), ExtResource("8_jatox")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 320.0

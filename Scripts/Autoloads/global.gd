@@ -8,6 +8,7 @@ var round_loser: int
 
 var rounds: int = 0
 var game_started: bool = false
+var current_map: String
 
 func character_chosen(player_id: int, fighter: Fighter):
 	if player_id == 1:
@@ -49,22 +50,20 @@ func _process(delta: float) -> void:
 	
 func start_game():
 	if game_started:
+		refresh_players()
 		return
 	else:
 		game_started = true
 		add_players()
 
 func upgrade_chosen(player_number: int, upgrade_data: UpgradeData):
-	match upgrade_data.type:
-		upgrade_data.UpgradeType.ATK_SPEED:
-			get_fighter(player_number).attack_speed = get_fighter(player_number).attack_speed * (1 + upgrade_data.value)
-		upgrade_data.UpgradeType.DMG:
-			get_fighter(player_number).damage_multiplier = get_fighter(player_number).damage_multiplier * (1 + upgrade_data.value)
-		upgrade_data.UpgradeType.KNOCKBACK:
-			get_fighter(player_number).knockback_multiplier = get_fighter(player_number).knockback_multiplier * (1 + upgrade_data.value)
-	refresh_players()
+	upgrade_data.apply_upgrade(get_fighter(player_number))
+	SceneManager.change_scene(SceneManager.get_map(current_map), true)
 	
 func _on_round_over(player_number: int):
+	for player in get_fighters():
+		player.hide()
+		player.ui_layer.hide()
 	match player_number:
 		2:
 			p1_victories += 1
@@ -73,16 +72,19 @@ func _on_round_over(player_number: int):
 			p2_victories += 1
 			round_loser = 1
 			
-	SceneManager.change_scene(SceneManager.scenes.get("UpgradePicker"))
+	SceneManager.change_scene(SceneManager.get_menu("UpgradePicker"), false)
 	print("Player One Victories: ", p1_victories, " Player Two Victories: ", p2_victories)
 	
 func refresh_players():
 	rounds += 1
 	for player in get_fighters():
+		player.state_machine.change_state(player.state_machine.states.get("Walk"))
 		player.stamina = player.max_stamina
 		player.heal(player.max_health)
 		player.mug_shot.frame = 0
 		player.animation_player.play("RESET")
+		player.show()
+		player.ui_layer.show()
 	player_one_fighter.position = Vector2(70, 150)
 	player_two_fighter.position = Vector2(250, 150)
 	

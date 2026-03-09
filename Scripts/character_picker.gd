@@ -8,6 +8,8 @@ var p2_index := 1
 @onready var p1_outline: Sprite2D = $P1Outline
 @onready var p2_outline: Sprite2D = $P2Outline
 @onready var start: Button = $Start
+@onready var p1_label: Label = $Fighters/HBoxContainer/P1Label
+@onready var p2_label: Label = $Fighters/HBoxContainer/P2Label
 
 var p1_chosen_button: CharacterSelectorbutton = null
 var p2_chosen_button: CharacterSelectorbutton = null
@@ -34,6 +36,8 @@ func _ready() -> void:
 	p2_index = min(1, buttons.size() - 1) # avoids out-of-bounds
 	p1_outline.global_position = buttons[p1_index].global_position + Vector2(19, 54)
 	p2_outline.global_position = buttons[p2_index].global_position + Vector2(57, 54)
+	assign_devices(0, true)
+	assign_devices(1, true)
 	Input.joy_connection_changed.connect(assign_devices)
 		
 func assign_devices(device: int, connected: bool):
@@ -151,7 +155,9 @@ func _move_player(player_id: int, dir: int):
 func _process(delta):
 	_handle_analog(p1_index, p1_axis_direction, p1_hold_timer, 1, delta)
 	_handle_analog(p2_index, p2_axis_direction, p2_hold_timer, 2, delta)
-
+	p1_label.text = buttons.get(p1_index).character.instantiate().fighter_name
+	p2_label.text = buttons.get(p2_index).character.instantiate().fighter_name
+	
 func update_start_state():
 	if p1_chosen_button != null and p2_chosen_button != null:
 		start.grab_focus()
@@ -176,4 +182,4 @@ func _on_character_chosen(player_id: int, fighter: Fighter):
 	
 func _on_start_pressed() -> void:
 	if can_start:
-		SceneManager.change_scene(SceneManager.scenes.get("BuildingTop"))
+		SceneManager.change_scene(SceneManager.get_map(Global.current_map), true)

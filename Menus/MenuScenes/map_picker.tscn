@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://civ6yu7rec1ae"]
+
+[ext_resource type="Script" uid="uid://co2tce70fhid2" path="res://Scripts/map_button.gd" id="1_iubag"]
+[ext_resource type="Script" uid="uid://cmcib21mx21uy" path="res://Scripts/map_picker.gd" id="1_n3dxs"]
+[ext_resource type="Resource" uid="uid://bltliql5f41xw" path="res://Maps/building_top.tres" id="2_8j4j6"]
+[ext_resource type="Texture2D" uid="uid://bxu644a6pqw76" path="res://Assets/Maps/MiniMaps/MiniBuildingTop.png" id="2_eruj1"]
+[ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/training_floor.tres" id="2_pvwqt"]
+[ext_resource type="Texture2D" uid="uid://cvctnncn20abu" path="res://Assets/UI/MapSelector.png" id="5_2vbpn"]
+
+[node name="MapPicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n3dxs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 312.0
+offset_bottom = 134.0
+theme_override_constants/separation = 8
+
+[node name="MapButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(96, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_eruj1")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_iubag")
+map = ExtResource("2_8j4j6")
+metadata/_custom_type_script = "uid://co2tce70fhid2"
+
+[node name="MapButton2" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(96, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_eruj1")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_iubag")
+map = ExtResource("2_pvwqt")
+metadata/_custom_type_script = "uid://co2tce70fhid2"
+
+[node name="MapButton3" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(96, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_eruj1")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_iubag")
+map = ExtResource("2_pvwqt")
+metadata/_custom_type_script = "uid://co2tce70fhid2"
+
+[node name="Outline" type="Sprite2D" parent="."]
+position = Vector2(160, 72)
+texture = ExtResource("5_2vbpn")
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.5
+offset_top = -58.0
+offset_right = 35.5
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Confirm"
+
+[node name="MapName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_top = 4.0
+offset_right = 74.0
+offset_bottom = 27.0
+grow_horizontal = 2
+text = "Map Name"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]

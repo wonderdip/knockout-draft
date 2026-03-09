@@ -7,7 +7,8 @@
 script = ExtResource("1_28i63")
 texture = ExtResource("2_56ejo")
 name = "Fast Attacks"
-description = "All Attacks are faster"
-type = 2
+description = "All Attacks are 20% faster"
+type = 1
 rarity = 1
+value = 0.2
 metadata/_custom_type_script = "uid://cggfpdoju55mu"

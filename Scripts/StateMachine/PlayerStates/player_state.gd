@@ -11,6 +11,7 @@ var fall_anim: String = "fall"
 var crouch_anim: String = "crouch"
 var parry_anim: String = "parry"
 var victory_anim: String = "victory"
+var knocked_anim: String = "knockdown"
 var crouch_parry_anim: String = "crouch_parry"
 
 #Input Keys

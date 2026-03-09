@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MenuResource" load_steps=3 format=3 uid="uid://ccbr7umm0nsgp"]
+
+[ext_resource type="Script" uid="uid://dolknqkbre8pq" path="res://Scripts/menu_resource.gd" id="1_0tlgr"]
+[ext_resource type="PackedScene" uid="uid://c5u15fj6pm6ap" path="res://Menus/MenuScenes/upgrade_picker.tscn" id="1_t4k7b"]
+
+[resource]
+script = ExtResource("1_0tlgr")
+menu_scene = ExtResource("1_t4k7b")
+name = "UpgradePicker"
+metadata/_custom_type_script = "uid://dolknqkbre8pq"
