@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c1aeytphoal37" path="res://Scripts/Autoloads/scene_manager.gd" id="1_cdf2b"]
 [ext_resource type="Script" uid="uid://dn478sj8nl1rx" path="res://Scripts/map_resource.gd" id="2_5xiqd"]
-[ext_resource type="Resource" uid="uid://bltliql5f41xw" path="res://Maps/building_top.tres" id="3_bxo4p"]
-[ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/training_floor.tres" id="4_2ilc3"]
+[ext_resource type="Resource" uid="uid://bltliql5f41xw" path="res://Maps/roof_top.tres" id="3_bxo4p"]
+[ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/dojo.tres" id="4_2ilc3"]
 [ext_resource type="Script" uid="uid://dolknqkbre8pq" path="res://Scripts/menu_resource.gd" id="5_umgqe"]
 [ext_resource type="Resource" uid="uid://68a5ihuq0c4t" path="res://Menus/map_picker.tres" id="6_0gapa"]
 [ext_resource type="Resource" uid="uid://ccbr7umm0nsgp" path="res://Menus/upgrade_picker.tres" id="7_ribls"]

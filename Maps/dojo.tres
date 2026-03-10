@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapResource" load_steps=3 format=3 uid="uid://dcon7fl8pd022"]
+
+[ext_resource type="PackedScene" uid="uid://cmrxtaee8x6ma" path="res://Maps/MapScenes/dojo.tscn" id="1_wo5nq"]
+[ext_resource type="Script" uid="uid://dn478sj8nl1rx" path="res://Scripts/map_resource.gd" id="2_55nw0"]
+
+[resource]
+script = ExtResource("2_55nw0")
+map_scene = ExtResource("1_wo5nq")
+name = "Dojo"
+metadata/_custom_type_script = "uid://dn478sj8nl1rx"

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxu644a6pqw76"
-path="res://.godot/imported/MiniBuildingTop.png-ecc48e23992fa6fd86bbb73ca320338e.ctex"
+path="res://.godot/imported/MiniRoofTop.png-4594666a553acfd761171c0de70d0bcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/MiniMaps/MiniBuildingTop.png"
-dest_files=["res://.godot/imported/MiniBuildingTop.png-ecc48e23992fa6fd86bbb73ca320338e.ctex"]
+source_file="res://Assets/Maps/MiniMaps/MiniRoofTop.png"
+dest_files=["res://.godot/imported/MiniRoofTop.png-4594666a553acfd761171c0de70d0bcd.ctex"]
 
 [params]
 

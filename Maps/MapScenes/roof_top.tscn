@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://imgwoactuoqv"]
 
-[ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_wmjn6"]
-[ext_resource type="Texture2D" uid="uid://bljla2ruwc5w4" path="res://Assets/Maps/Skybox/Sky1.png" id="2_mg26l"]
-[ext_resource type="Texture2D" uid="uid://cgbpciqdng03l" path="res://Assets/Maps/Skybox/CloudLayer.png" id="3_dfgkp"]
-[ext_resource type="Texture2D" uid="uid://ci6e3htdet3sr" path="res://Assets/Maps/BuildingTop.png" id="4_wxrn5"]
-[ext_resource type="PackedScene" uid="uid://h7ggmrg7govk" path="res://Scenes/dynamic_camera.tscn" id="5_v1o7c"]
-[ext_resource type="Texture2D" uid="uid://bxu644a6pqw76" path="res://Assets/Maps/MiniMaps/MiniBuildingTop.png" id="6_mg26l"]
+[ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_v603s"]
+[ext_resource type="Texture2D" uid="uid://bljla2ruwc5w4" path="res://Assets/Maps/Skybox/Sky1.png" id="2_grnr6"]
+[ext_resource type="Texture2D" uid="uid://cgbpciqdng03l" path="res://Assets/Maps/Skybox/CloudLayer.png" id="3_7yxyl"]
+[ext_resource type="Texture2D" uid="uid://ci6e3htdet3sr" path="res://Assets/Maps/RoofTop.png" id="4_dqjvh"]
+[ext_resource type="PackedScene" uid="uid://h7ggmrg7govk" path="res://Scenes/dynamic_camera.tscn" id="5_7kyva"]
+[ext_resource type="Texture2D" uid="uid://bxu644a6pqw76" path="res://Assets/Maps/MiniMaps/MiniRoofTop.png" id="6_im5bi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbmvt"]
 size = Vector2(384, 36)
@@ -16,23 +16,23 @@ size = Vector2(12, 216)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdkuv"]
 size = Vector2(12, 222)
 
-[node name="BuildingTop" type="Node2D" node_paths=PackedStringArray("mini_map")]
-script = ExtResource("1_wmjn6")
+[node name="RoofTop" type="Node2D" node_paths=PackedStringArray("mini_map")]
+script = ExtResource("1_v603s")
 mini_map = NodePath("MiniMap")
 
 [node name="SpriteLayers" type="Node2D" parent="."]
 
 [node name="SkyBox" type="Sprite2D" parent="SpriteLayers"]
 position = Vector2(160, 108)
-texture = ExtResource("2_mg26l")
+texture = ExtResource("2_grnr6")
 
 [node name="Clouds" type="Sprite2D" parent="SpriteLayers"]
 position = Vector2(160, 108)
-texture = ExtResource("3_dfgkp")
+texture = ExtResource("3_7yxyl")
 
-[node name="BuildingTop" type="Sprite2D" parent="SpriteLayers"]
+[node name="Roof" type="Sprite2D" parent="SpriteLayers"]
 position = Vector2(160, 108)
-texture = ExtResource("4_wxrn5")
+texture = ExtResource("4_dqjvh")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(-32, 0)
@@ -53,10 +53,10 @@ shape = SubResource("RectangleShape2D_s6dm4")
 position = Vector2(390, 105)
 shape = SubResource("RectangleShape2D_qdkuv")
 
-[node name="DynamicCamera" parent="." instance=ExtResource("5_v1o7c")]
+[node name="DynamicCamera" parent="." instance=ExtResource("5_7kyva")]
 limit_smoothed = true
 editor_draw_limits = true
 
 [node name="MiniMap" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("6_mg26l")
+texture = ExtResource("6_im5bi")

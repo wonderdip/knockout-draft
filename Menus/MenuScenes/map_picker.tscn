@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://co2tce70fhid2" path="res://Scripts/map_button.gd" id="1_iubag"]
 [ext_resource type="Script" uid="uid://cmcib21mx21uy" path="res://Scripts/map_picker.gd" id="1_n3dxs"]
-[ext_resource type="Resource" uid="uid://bltliql5f41xw" path="res://Maps/building_top.tres" id="2_8j4j6"]
-[ext_resource type="Texture2D" uid="uid://bxu644a6pqw76" path="res://Assets/Maps/MiniMaps/MiniBuildingTop.png" id="2_eruj1"]
-[ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/training_floor.tres" id="2_pvwqt"]
+[ext_resource type="Resource" uid="uid://bltliql5f41xw" path="res://Maps/roof_top.tres" id="2_8j4j6"]
+[ext_resource type="Texture2D" uid="uid://bxu644a6pqw76" path="res://Assets/Maps/MiniMaps/MiniRoofTop.png" id="2_eruj1"]
+[ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/dojo.tres" id="2_pvwqt"]
 [ext_resource type="Texture2D" uid="uid://cvctnncn20abu" path="res://Assets/UI/MapSelector.png" id="5_2vbpn"]
 
 [node name="MapPicker" type="Control"]
@@ -61,7 +61,7 @@ map = ExtResource("2_pvwqt")
 metadata/_custom_type_script = "uid://co2tce70fhid2"
 
 [node name="Outline" type="Sprite2D" parent="."]
-position = Vector2(160, 72)
+position = Vector2(160, 71)
 texture = ExtResource("5_2vbpn")
 
 [node name="ConfirmButton" type="Button" parent="."]

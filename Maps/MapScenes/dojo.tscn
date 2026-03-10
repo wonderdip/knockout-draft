@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmrxtaee8x6ma"]
+[gd_scene load_steps=8 format=3 uid="uid://cmrxtaee8x6ma"]
 
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_r5gij"]
-[ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/TrainingFloor.png" id="2_l74i0"]
+[ext_resource type="Texture2D" uid="uid://b2wcorm5ysy5g" path="res://Assets/Maps/Dojo.png" id="2_l74i0"]
 [ext_resource type="PackedScene" uid="uid://h7ggmrg7govk" path="res://Scenes/dynamic_camera.tscn" id="3_gjmtj"]
+[ext_resource type="Texture2D" uid="uid://c0jtxukbqeydt" path="res://Assets/Maps/MiniMaps/MiniDojo.png" id="4_l74i0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fstxd"]
 size = Vector2(384, 36)
@@ -13,11 +14,11 @@ size = Vector2(12, 216)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bch3r"]
 size = Vector2(12, 222)
 
-[node name="TrainingFloor" type="Node2D" node_paths=PackedStringArray("mini_map")]
+[node name="Dojo" type="Node2D" node_paths=PackedStringArray("mini_map")]
 script = ExtResource("1_r5gij")
-mini_map = NodePath("TrainingFloorSprite")
+mini_map = NodePath("MiniMap")
 
-[node name="TrainingFloorSprite" type="Sprite2D" parent="."]
+[node name="DojoSprite" type="Sprite2D" parent="."]
 position = Vector2(160, 108)
 texture = ExtResource("2_l74i0")
 
@@ -41,3 +42,7 @@ position = Vector2(390, 105)
 shape = SubResource("RectangleShape2D_bch3r")
 
 [node name="DynamicCamera" parent="." instance=ExtResource("3_gjmtj")]
+
+[node name="MiniMap" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_l74i0")

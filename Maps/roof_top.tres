@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapResource" load_steps=3 format=3 uid="uid://bltliql5f41xw"]
+
+[ext_resource type="PackedScene" uid="uid://imgwoactuoqv" path="res://Maps/MapScenes/roof_top.tscn" id="1_j3yag"]
+[ext_resource type="Script" uid="uid://dn478sj8nl1rx" path="res://Scripts/map_resource.gd" id="2_k7iae"]
+
+[resource]
+script = ExtResource("2_k7iae")
+map_scene = ExtResource("1_j3yag")
+name = "Roof Top"
+metadata/_custom_type_script = "uid://dn478sj8nl1rx"
