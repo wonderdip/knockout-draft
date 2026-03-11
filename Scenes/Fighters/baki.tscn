@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://v1n36ti02lsq" path="res://Scripts/StateMachine/PlayerStates/knocked.gd" id="18_6me16"]
 [ext_resource type="Script" uid="uid://oplxlq57q0ni" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_light_kick.gd" id="18_njn8b"]
 [ext_resource type="Script" uid="uid://58j3egyvj5pb" path="res://Scripts/StateMachine/PlayerStates/AttackStates/high_kick.gd" id="18_tg356"]
-[ext_resource type="Script" uid="uid://boqjeoefqersr" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/AttackStates/kick.gd" id="19_houyy"]
 [ext_resource type="PackedScene" uid="uid://bq1j8ndul5exb" path="res://Scenes/health_bar.tscn" id="22_rdo4m"]
 [ext_resource type="Script" uid="uid://dbnpqtryemt8l" path="res://Scripts/StateMachine/PlayerStates/AttackStates/crouch_strong_kick.gd" id="23_f8p6c"]
 [ext_resource type="PackedScene" uid="uid://c8wi02732rj0n" path="res://Scenes/stamina_bar.tscn" id="23_yqkxa"]
@@ -1197,6 +1197,22 @@ tracks/3/keys = {
 "values": [true, false, true]
 }
 
+[sub_resource type="Animation" id="Animation_wfddp"]
+resource_name = "knockdown"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [45, 46, 47]
+}
+
 [sub_resource type="Animation" id="Animation_3cnae"]
 resource_name = "landing"
 length = 0.13333668
@@ -1512,22 +1528,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 3, 2, 1]
-}
-
-[sub_resource type="Animation" id="Animation_wfddp"]
-resource_name = "knockdown"
-length = 0.66667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [45, 46, 47]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_md325"]

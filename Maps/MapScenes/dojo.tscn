@@ -19,7 +19,7 @@ script = ExtResource("1_r5gij")
 mini_map = NodePath("MiniMap")
 
 [node name="DojoSprite" type="Sprite2D" parent="."]
-position = Vector2(160, 108)
+position = Vector2(160, 98)
 texture = ExtResource("2_l74i0")
 
 [node name="Floor" type="StaticBody2D" parent="."]
