@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo8jw5l2qsb4h"]
+
+[ext_resource type="Texture2D" uid="uid://1glmec6qybt3" path="res://Assets/Maps/Dunes.png" id="1_6p6lc"]
+[ext_resource type="PackedScene" uid="uid://h7ggmrg7govk" path="res://Scenes/dynamic_camera.tscn" id="2_317sh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7ucw"]
+size = Vector2(384, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s21rq"]
+size = Vector2(12, 216)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78lwr"]
+size = Vector2(12, 222)
+
+[node name="dunes" type="Node2D"]
+
+[node name="DuneSprite" type="Sprite2D" parent="."]
+position = Vector2(160, 98)
+texture = ExtResource("1_6p6lc")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(-32, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(192, 198)
+shape = SubResource("RectangleShape2D_y7ucw")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(-32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-6, 108)
+shape = SubResource("RectangleShape2D_s21rq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2(390, 105)
+shape = SubResource("RectangleShape2D_78lwr")
+
+[node name="DynamicCamera" parent="." instance=ExtResource("2_317sh")]
+
+[node name="MiniMap" type="Sprite2D" parent="."]
