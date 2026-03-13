@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://civ6yu7rec1ae"]
+[gd_scene load_steps=8 format=3 uid="uid://civ6yu7rec1ae"]
 
 [ext_resource type="Script" uid="uid://co2tce70fhid2" path="res://Scripts/map_button.gd" id="1_iubag"]
 [ext_resource type="Script" uid="uid://cmcib21mx21uy" path="res://Scripts/map_picker.gd" id="1_n3dxs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxu644a6pqw76" path="res://Assets/Maps/MiniMaps/MiniRoofTop.png" id="2_eruj1"]
 [ext_resource type="Resource" uid="uid://dcon7fl8pd022" path="res://Maps/dojo.tres" id="2_pvwqt"]
 [ext_resource type="Texture2D" uid="uid://cvctnncn20abu" path="res://Assets/UI/MapSelector.png" id="5_2vbpn"]
+[ext_resource type="Resource" uid="uid://3hjkqf6sjks5" path="res://Maps/dunes.tres" id="6_7fn87"]
 
 [node name="MapPicker" type="Control"]
 layout_mode = 3
@@ -57,7 +58,7 @@ texture_normal = ExtResource("2_eruj1")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("1_iubag")
-map = ExtResource("2_pvwqt")
+map = ExtResource("6_7fn87")
 metadata/_custom_type_script = "uid://co2tce70fhid2"
 
 [node name="Outline" type="Sprite2D" parent="."]

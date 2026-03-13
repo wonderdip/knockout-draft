@@ -10,7 +10,7 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(96, 54)
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	texture_normal = map.map_scene.instantiate().mini_map.texture
+	texture_normal = map.mini_map
 
 func choose():
 	modulate = Color(0.5, 0.5, 0.5)
