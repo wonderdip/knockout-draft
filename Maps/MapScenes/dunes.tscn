@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bo8jw5l2qsb4h"]
+[gd_scene load_steps=7 format=3 uid="uid://bo8jw5l2qsb4h"]
 
 [ext_resource type="Texture2D" uid="uid://1glmec6qybt3" path="res://Assets/Maps/Dunes.png" id="1_6p6lc"]
 [ext_resource type="Script" uid="uid://c8nllkshljec6" path="res://Scripts/map.gd" id="1_y7ucw"]
 [ext_resource type="PackedScene" uid="uid://h7ggmrg7govk" path="res://Scenes/dynamic_camera.tscn" id="2_317sh"]
-[ext_resource type="PackedScene" uid="uid://cflwsdegvk5c7" path="res://Scenes/Fighters/dylan.tscn" id="4_y7ucw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7ucw"]
 size = Vector2(384, 36)
@@ -42,5 +41,3 @@ position = Vector2(390, 105)
 shape = SubResource("RectangleShape2D_78lwr")
 
 [node name="DynamicCamera" parent="." instance=ExtResource("2_317sh")]
-
-[node name="Dylan" parent="." instance=ExtResource("4_y7ucw")]

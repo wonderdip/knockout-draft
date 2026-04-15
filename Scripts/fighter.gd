@@ -186,9 +186,8 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.device != device_id:
 		return
-
-	# Only log fresh presses, not releases
-	for action in ["light_punch", "strong_punch", "light_kick", "strong_kick", "crouch", "jump", "left", "right"]:
+		
+	for action in combo_buffer.combo_actions:
 		if event.is_action_pressed(action):
 			combo_buffer.add_input(action)
 

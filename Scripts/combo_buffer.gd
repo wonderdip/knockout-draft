@@ -3,6 +3,7 @@ class_name ComboBuffer
 
 var buffer: Array = []
 var buffer_window: float = 0.5
+var combo_actions: Array[String] = ["light_punch", "strong_punch", "light_kick", "strong_kick", "crouch", "jump", "left", "right"]
 
 # { "sequence": Array[String], "state_name": String }
 var registered_combos: Array = []
